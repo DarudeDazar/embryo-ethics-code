@@ -1,0 +1,1832 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Code of Professional Ethics for AI Developers in Reproductive Embryo Selection Systems</title>
+<meta name="description" content="Translating medical professionalism into enforceable obligations for AI developers in IVF and PGT. A Harvard Medical School Bioethics Capstone by Rohan Dasari, mentored by Dr. Insoo Hyun.">
+<meta name="author" content="Rohan Dasari">
+
+<meta property="og:title" content="Code of Professional Ethics for AI Developers in Reproductive Embryo Selection Systems">
+<meta property="og:description" content="Translating medical professionalism into enforceable obligations for AI developers in IVF and PGT.">
+<meta property="og:type" content="article">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --teal-950: #062f24;
+    --teal-900: #0a4a3a;
+    --teal-800: #0F6E56;
+    --teal-600: #1D9E75;
+    --teal-400: #5DCAA5;
+    --teal-100: #E1F5EE;
+    --teal-50:  #F3FBF8;
+
+    --ink:       #141413;
+    --ink-soft:  #2a2a28;
+    --gray-700:  #4a4a48;
+    --gray-500:  #787874;
+    --gray-400:  #a8a8a4;
+    --gray-300:  #d0d0ca;
+    --gray-200:  #e8e8e2;
+    --gray-100:  #f2f2ec;
+    --paper:     #faf8f2;
+    --paper-alt: #f4f2ea;
+    --white:     #ffffff;
+    --surface:   #ffffff;
+
+    --prohibit:    #8B2635;
+    --prohibit-bg: #fbecec;
+
+    --serif: 'Fraunces', 'Cormorant Garamond', Georgia, serif;
+    --sans:  'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+    --mono:  'IBM Plex Mono', 'Courier New', monospace;
+
+    --sidebar-w: 260px;
+    --content-max: 820px;
+
+    --shadow-sm: 0 1px 2px rgba(20,20,19,0.04), 0 1px 3px rgba(20,20,19,0.03);
+    --shadow-md: 0 4px 16px rgba(20,20,19,0.06), 0 1px 4px rgba(20,20,19,0.04);
+    --shadow-lg: 0 12px 40px rgba(20,20,19,0.08), 0 4px 12px rgba(20,20,19,0.04);
+
+    --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="dark"] {
+    --ink:       #f0ede5;
+    --ink-soft:  #e2dfd6;
+    --gray-700:  #b8b5ac;
+    --gray-500:  #8a8781;
+    --gray-400:  #6a6762;
+    --gray-300:  #4a4742;
+    --gray-200:  #333330;
+    --gray-100:  #242421;
+    --paper:     #161614;
+    --paper-alt: #1c1c1a;
+    --white:     #1f1f1c;
+    --surface:   #1f1f1c;
+
+    --teal-800: #35b98a;
+    --teal-600: #5DCAA5;
+    --teal-100: #0f3d2f;
+    --teal-50:  #0a2d22;
+
+    --prohibit:    #d96378;
+    --prohibit-bg: #2a1518;
+
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
+    --shadow-md: 0 4px 16px rgba(0,0,0,0.3);
+    --shadow-lg: 0 12px 40px rgba(0,0,0,0.4);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+body {
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    background: var(--paper);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+    transition: background 0.4s var(--ease), color 0.4s var(--ease);
+}
+
+::selection { background: var(--teal-400); color: var(--ink); }
+
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.4;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+}
+
+[data-theme="dark"] body::before { mix-blend-mode: screen; opacity: 0.3; }
+
+.scroll-progress {
+    position: fixed; top: 0; left: 0;
+    height: 2px; width: 0%;
+    background: linear-gradient(90deg, var(--teal-600), var(--teal-400));
+    z-index: 1000;
+    transition: width 0.1s linear;
+}
+
+.topbar {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(250, 248, 242, 0.82);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border-bottom: 1px solid var(--gray-200);
+    transition: background 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+[data-theme="dark"] .topbar { background: rgba(22, 22, 20, 0.82); }
+
+.topbar-inner {
+    max-width: 1400px; margin: 0 auto;
+    padding: 14px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 24px;
+}
+
+.brand {
+    display: flex; align-items: center; gap: 10px;
+    font-family: var(--serif);
+    font-weight: 500; font-size: 16px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    text-decoration: none;
+}
+
+.brand-mark {
+    width: 28px; height: 28px;
+    border: 1.5px solid var(--teal-600);
+    border-radius: 50%;
+    display: grid; place-items: center;
+    position: relative; flex-shrink: 0;
+}
+.brand-mark::after {
+    content: '';
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--teal-600);
+}
+
+.brand-text strong { font-weight: 500; letter-spacing: 0.005em; }
+.brand-text small {
+    display: block;
+    font-family: var(--sans);
+    font-size: 10px; font-weight: 500;
+    color: var(--gray-500);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-top: -2px;
+}
+
+.top-actions { display: flex; align-items: center; gap: 16px; }
+
+.top-actions a {
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--gray-700);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: color 0.2s;
+}
+.top-actions a:hover { color: var(--teal-800); }
+
+.theme-toggle {
+    background: none;
+    border: 1px solid var(--gray-300);
+    border-radius: 100px;
+    padding: 6px 14px 6px 10px;
+    font-family: var(--sans);
+    font-size: 12px;
+    color: var(--gray-700);
+    cursor: pointer;
+    display: flex; align-items: center; gap: 6px;
+    transition: all 0.2s;
+}
+.theme-toggle:hover { border-color: var(--teal-600); color: var(--teal-800); }
+.theme-toggle svg {
+    width: 14px; height: 14px;
+    stroke: currentColor; fill: none; stroke-width: 1.8;
+}
+
+.layout {
+    max-width: 1400px; margin: 0 auto;
+    padding: 0 32px;
+    display: grid;
+    grid-template-columns: var(--sidebar-w) 1fr;
+    gap: 64px;
+    padding-top: 64px;
+}
+
+.sidenav {
+    position: sticky; top: 84px;
+    align-self: start;
+    height: calc(100vh - 100px);
+    padding: 48px 0 24px;
+    overflow-y: auto;
+    font-family: var(--sans);
+    scrollbar-width: thin;
+    scrollbar-color: var(--gray-300) transparent;
+}
+.sidenav::-webkit-scrollbar { width: 4px; }
+.sidenav::-webkit-scrollbar-thumb { background: var(--gray-300); border-radius: 2px; }
+
+.sidenav-label {
+    font-family: var(--mono);
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gray-500);
+    margin-bottom: 20px;
+    padding-left: 14px;
+}
+
+.sidenav ol { list-style: none; counter-reset: section; }
+.sidenav li { counter-increment: section; position: relative; }
+
+.sidenav a {
+    display: flex; align-items: baseline; gap: 12px;
+    padding: 9px 14px;
+    font-size: 13.5px;
+    color: var(--gray-500);
+    text-decoration: none;
+    line-height: 1.4;
+    border-left: 1.5px solid transparent;
+    transition: all 0.2s var(--ease);
+    letter-spacing: 0.005em;
+}
+
+.sidenav a::before {
+    content: counter(section, decimal-leading-zero);
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--gray-400);
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+    padding-top: 2px;
+    transition: color 0.2s;
+}
+
+.sidenav a:hover { color: var(--ink); background: var(--gray-100); }
+.sidenav a:hover::before { color: var(--teal-600); }
+
+.sidenav a.active {
+    color: var(--teal-800);
+    border-left-color: var(--teal-600);
+    font-weight: 500;
+    background: var(--teal-50);
+}
+.sidenav a.active::before { color: var(--teal-600); font-weight: 600; }
+
+.mobile-nav-trigger {
+    display: none;
+    background: none;
+    border: 1px solid var(--gray-300);
+    border-radius: 100px;
+    padding: 6px 14px;
+    font-family: var(--sans);
+    font-size: 12px;
+    color: var(--gray-700);
+    cursor: pointer;
+    align-items: center; gap: 6px;
+}
+
+.mobile-nav-panel {
+    display: none;
+    position: fixed; top: 60px; left: 0; right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--gray-200);
+    z-index: 99;
+    max-height: calc(100vh - 60px);
+    overflow-y: auto;
+    padding: 24px 32px;
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.4s var(--ease-out), opacity 0.3s;
+}
+.mobile-nav-panel.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.content {
+    min-width: 0;
+    max-width: var(--content-max);
+    padding: 40px 0 120px;
+}
+
+.hero {
+    padding: 40px 0 80px;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-family: var(--mono);
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--teal-800);
+    margin-bottom: 32px;
+}
+.hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 32px; height: 1px;
+    background: var(--teal-600);
+}
+
+.hero h1 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(36px, 5.2vw, 64px);
+    font-variation-settings: "opsz" 96;
+    line-height: 1.05;
+    color: var(--ink);
+    letter-spacing: -0.025em;
+    margin-bottom: 32px;
+    max-width: 13ch;
+}
+.hero h1 em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--teal-800);
+    font-variation-settings: "opsz" 96;
+}
+.hero h1 .thin { font-weight: 300; color: var(--gray-500); }
+
+.hero-lede {
+    font-family: var(--serif);
+    font-size: clamp(19px, 2vw, 22px);
+    font-variation-settings: "opsz" 14;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--gray-700);
+    max-width: 58ch;
+    line-height: 1.5;
+    margin-bottom: 48px;
+}
+
+.hero-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 28px 40px;
+    max-width: 780px;
+    padding-top: 36px;
+    border-top: 1px solid var(--gray-200);
+    margin-bottom: 40px;
+}
+
+.hero-meta-item .label {
+    font-family: var(--mono);
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gray-500);
+    margin-bottom: 8px;
+}
+
+.hero-meta-item .value {
+    font-family: var(--serif);
+    font-size: 18px; font-weight: 500;
+    font-variation-settings: "opsz" 14;
+    color: var(--ink);
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+}
+
+.hero-meta-item .value small {
+    display: block;
+    font-family: var(--sans);
+    font-size: 12px; font-weight: 400;
+    color: var(--gray-500);
+    margin-top: 2px;
+    letter-spacing: 0.01em;
+}
+
+.download-row { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.dl-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 11px 20px;
+    background: var(--surface);
+    border: 1px solid var(--gray-300);
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 13px; font-weight: 500;
+    letter-spacing: 0.005em;
+    transition: all 0.25s var(--ease);
+    border-radius: 4px;
+    font-family: var(--sans);
+}
+.dl-btn:hover {
+    border-color: var(--teal-600);
+    color: var(--teal-800);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+.dl-btn svg {
+    width: 15px; height: 15px;
+    stroke: currentColor; fill: none; stroke-width: 1.6;
+    transition: transform 0.25s var(--ease);
+}
+.dl-btn:hover svg { transform: translateY(2px); }
+
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out); }
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+.reveal-stagger > * { opacity: 0; transform: translateY(20px); transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out); }
+.reveal-stagger.in > * { opacity: 1; transform: translateY(0); }
+.reveal-stagger.in > *:nth-child(1) { transition-delay: 0.05s; }
+.reveal-stagger.in > *:nth-child(2) { transition-delay: 0.15s; }
+.reveal-stagger.in > *:nth-child(3) { transition-delay: 0.25s; }
+.reveal-stagger.in > *:nth-child(4) { transition-delay: 0.35s; }
+.reveal-stagger.in > *:nth-child(5) { transition-delay: 0.45s; }
+.reveal-stagger.in > *:nth-child(6) { transition-delay: 0.55s; }
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal, .reveal-stagger > * {
+        opacity: 1 !important; transform: none !important; transition: none !important;
+    }
+}
+
+section {
+    padding: 96px 0;
+    scroll-margin-top: 80px;
+    border-bottom: 1px solid var(--gray-200);
+    position: relative;
+}
+section:last-of-type { border-bottom: none; }
+
+.section-header { margin-bottom: 56px; max-width: 62ch; }
+
+.section-number {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono);
+    font-size: 11px; font-weight: 500;
+    color: var(--teal-600);
+    margin-bottom: 20px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+.section-number::before {
+    content: '§';
+    font-family: var(--serif);
+    font-size: 16px;
+    font-style: italic;
+    color: var(--teal-600);
+}
+
+.section-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(32px, 3.8vw, 46px);
+    font-variation-settings: "opsz" 48;
+    line-height: 1.1;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+}
+.section-title em {
+    font-style: italic;
+    color: var(--teal-800);
+    font-weight: 400;
+}
+
+.section-intro {
+    font-family: var(--serif);
+    font-size: 19px;
+    font-variation-settings: "opsz" 14;
+    color: var(--gray-700);
+    line-height: 1.55;
+    font-weight: 400;
+    max-width: 58ch;
+}
+
+.preamble {
+    background: var(--surface);
+    border: 1px solid var(--gray-200);
+    border-left: 3px solid var(--teal-600);
+    padding: 40px 48px;
+    max-width: 72ch;
+    box-shadow: var(--shadow-sm);
+    border-radius: 2px;
+    position: relative;
+}
+.preamble::before {
+    content: '"';
+    position: absolute;
+    top: -8px; left: 24px;
+    font-family: var(--serif);
+    font-size: 72px;
+    color: var(--teal-400);
+    line-height: 1;
+    opacity: 0.6;
+}
+
+.preamble p {
+    font-family: var(--serif);
+    font-size: 19px;
+    font-variation-settings: "opsz" 14;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+}
+.preamble p:last-child { margin-bottom: 0; }
+
+.commitments {
+    display: flex; flex-direction: column;
+    border-top: 1px solid var(--gray-200);
+}
+
+.commitment {
+    border-bottom: 1px solid var(--gray-200);
+    overflow: hidden;
+    transition: background 0.3s var(--ease);
+}
+.commitment:hover { background: var(--paper-alt); }
+
+.commitment-header {
+    display: grid;
+    grid-template-columns: 72px 1fr auto;
+    gap: 24px;
+    align-items: center;
+    padding: 28px 16px 28px 0;
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+}
+.commitment-header::-webkit-details-marker { display: none; }
+
+.commitment-num {
+    font-family: var(--serif);
+    font-size: 36px;
+    font-weight: 300;
+    font-variation-settings: "opsz" 48;
+    color: var(--teal-600);
+    line-height: 1;
+    font-style: italic;
+    letter-spacing: -0.02em;
+}
+
+.commitment-title {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 500;
+    font-variation-settings: "opsz" 24;
+    color: var(--ink);
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+}
+
+.commitment-toggle {
+    width: 28px; height: 28px;
+    border: 1px solid var(--gray-300);
+    border-radius: 50%;
+    display: grid; place-items: center;
+    transition: all 0.3s var(--ease);
+    flex-shrink: 0;
+    position: relative;
+}
+.commitment-toggle::before,
+.commitment-toggle::after {
+    content: '';
+    position: absolute;
+    background: var(--gray-700);
+    transition: transform 0.3s var(--ease), background 0.3s;
+}
+.commitment-toggle::before { width: 10px; height: 1.5px; }
+.commitment-toggle::after { width: 1.5px; height: 10px; }
+
+.commitment[open] .commitment-toggle {
+    border-color: var(--teal-600);
+    background: var(--teal-50);
+}
+.commitment[open] .commitment-toggle::before { background: var(--teal-800); }
+.commitment[open] .commitment-toggle::after {
+    transform: rotate(90deg);
+    background: var(--teal-800);
+}
+
+.commitment-body-content {
+    padding: 0 16px 32px 96px;
+    max-width: 72ch;
+    animation: bodyIn 0.4s var(--ease-out);
+}
+
+@keyframes bodyIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.commitment-statement {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-variation-settings: "opsz" 14;
+    color: var(--ink-soft);
+    line-height: 1.6;
+}
+.commitment-statement strong {
+    font-weight: 600;
+    color: var(--ink);
+    background: var(--teal-50);
+    padding: 1px 6px;
+    border-radius: 2px;
+}
+
+@media (max-width: 640px) {
+    .commitment-header { grid-template-columns: 48px 1fr auto; gap: 16px; }
+    .commitment-num { font-size: 28px; }
+    .commitment-title { font-size: 19px; }
+    .commitment-body-content { padding: 0 0 28px 64px; }
+}
+
+.lifecycle-wrap {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 48px;
+    align-items: start;
+}
+
+.lifecycle-phases {
+    display: flex; flex-direction: column; gap: 4px;
+    border-left: 1px solid var(--gray-200);
+    position: sticky; top: 120px;
+}
+
+.phase-btn {
+    background: none; border: none;
+    text-align: left;
+    padding: 18px 20px 18px 24px;
+    cursor: pointer;
+    font-family: var(--sans);
+    color: var(--gray-500);
+    position: relative;
+    transition: all 0.3s var(--ease);
+    border-left: 2px solid transparent;
+    margin-left: -1px;
+    display: flex; flex-direction: column; gap: 4px;
+}
+
+.phase-btn:hover { color: var(--ink); background: var(--gray-100); }
+
+.phase-btn.active {
+    color: var(--teal-800);
+    border-left-color: var(--teal-600);
+    background: var(--teal-50);
+}
+
+.phase-btn-num {
+    font-family: var(--mono);
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.7;
+}
+
+.phase-btn-title {
+    font-family: var(--serif);
+    font-size: 18px; font-weight: 500;
+    font-variation-settings: "opsz" 24;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+}
+
+.lifecycle-content {
+    background: var(--surface);
+    border: 1px solid var(--gray-200);
+    padding: 44px 48px;
+    border-radius: 2px;
+    min-height: 380px;
+    box-shadow: var(--shadow-sm);
+}
+
+.phase-panel { display: none; }
+.phase-panel.active {
+    display: block;
+    animation: phaseIn 0.5s var(--ease-out);
+}
+
+@keyframes phaseIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.phase-panel-header {
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.phase-panel-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--teal-600);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.phase-panel-title {
+    font-family: var(--serif);
+    font-size: 26px; font-weight: 500;
+    font-variation-settings: "opsz" 32;
+    color: var(--ink);
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+}
+
+.phase-obligations { display: flex; flex-direction: column; gap: 16px; }
+
+.obligation {
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: 14px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--gray-700);
+}
+.obligation::before {
+    content: '';
+    margin-top: 9px;
+    width: 8px; height: 1px;
+    background: var(--teal-600);
+}
+.obligation strong { font-weight: 600; color: var(--ink); }
+
+@media (max-width: 900px) {
+    .lifecycle-wrap { grid-template-columns: 1fr; gap: 24px; }
+    .lifecycle-phases { position: static; }
+    .lifecycle-content { padding: 32px 28px; }
+}
+
+.prohibited-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+.prohibited-item {
+    background: var(--surface);
+    border: 1px solid var(--gray-200);
+    border-left: 3px solid var(--prohibit);
+    padding: 28px 30px;
+    border-radius: 2px;
+    transition: all 0.3s var(--ease);
+    position: relative;
+    overflow: hidden;
+}
+.prohibited-item::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--prohibit) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s var(--ease);
+}
+.prohibited-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-left-width: 5px;
+}
+.prohibited-item:hover::before { opacity: 0.4; }
+
+.prohibited-label {
+    font-family: var(--mono);
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--prohibit);
+    margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+}
+.prohibited-label::before {
+    content: '';
+    width: 10px; height: 10px;
+    background: var(--prohibit);
+    border-radius: 50%;
+}
+
+.prohibited-title {
+    font-family: var(--serif);
+    font-size: 20px; font-weight: 600;
+    font-variation-settings: "opsz" 24;
+    color: var(--ink);
+    line-height: 1.3;
+    margin-bottom: 14px;
+    letter-spacing: -0.01em;
+}
+
+.prohibited-rationale {
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--gray-700);
+}
+.prohibited-rationale strong { color: var(--ink-soft); font-weight: 600; }
+
+.accountability-list { counter-reset: acct; max-width: 72ch; }
+
+.accountability-item {
+    padding: 28px 0;
+    border-bottom: 1px solid var(--gray-200);
+    counter-increment: acct;
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 24px;
+    align-items: start;
+    transition: padding-left 0.3s var(--ease);
+}
+.accountability-item:hover { padding-left: 12px; }
+.accountability-item:last-child { border-bottom: none; }
+
+.accountability-item::before {
+    content: counter(acct, decimal-leading-zero);
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--teal-600);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    padding-top: 4px;
+}
+
+.accountability-item h4 {
+    font-family: var(--serif);
+    font-size: 20px; font-weight: 500;
+    font-variation-settings: "opsz" 24;
+    color: var(--ink);
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+}
+.accountability-item p {
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--gray-700);
+}
+
+.appendix-list { display: grid; gap: 28px; max-width: 72ch; }
+
+.appendix-item {
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--gray-200);
+}
+.appendix-item:last-child { border-bottom: none; }
+
+.appendix-item h4 {
+    font-family: var(--serif);
+    font-size: 17px; font-weight: 600;
+    color: var(--teal-900);
+    margin-bottom: 10px;
+    letter-spacing: -0.005em;
+}
+[data-theme="dark"] .appendix-item h4 { color: var(--teal-400); }
+
+.appendix-item p {
+    font-size: 15.5px;
+    line-height: 1.7;
+    color: var(--gray-700);
+}
+
+.cite {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--teal-800);
+    background: var(--teal-50);
+    padding: 2px 6px;
+    border-radius: 2px;
+    white-space: nowrap;
+}
+
+.references-list {
+    counter-reset: ref;
+    max-width: 72ch;
+    list-style: none;
+}
+.references-list li {
+    counter-increment: ref;
+    padding: 14px 0 14px 44px;
+    border-bottom: 1px dashed var(--gray-200);
+    position: relative;
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--gray-700);
+}
+.references-list li::before {
+    content: '[' counter(ref) ']';
+    position: absolute;
+    left: 0; top: 14px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--teal-600);
+    font-weight: 500;
+}
+.references-list em { color: var(--ink-soft); }
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    max-width: 72ch;
+}
+@media (max-width: 768px) {
+    .about-grid { grid-template-columns: 1fr; gap: 36px; }
+}
+.about-block h4 {
+    font-family: var(--serif);
+    font-size: 20px; font-weight: 500;
+    font-variation-settings: "opsz" 24;
+    color: var(--ink);
+    margin-bottom: 14px;
+    letter-spacing: -0.01em;
+}
+.about-block p {
+    font-size: 15.5px;
+    line-height: 1.7;
+    color: var(--gray-700);
+    margin-bottom: 16px;
+}
+.acks { font-style: italic; color: var(--gray-700); }
+
+.form-wrap {
+    background: var(--surface);
+    border: 1px solid var(--gray-200);
+    padding: 44px 48px;
+    max-width: 72ch;
+    border-radius: 2px;
+    box-shadow: var(--shadow-sm);
+}
+
+.form-intro {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-variation-settings: "opsz" 14;
+    color: var(--gray-700);
+    line-height: 1.6;
+    margin-bottom: 32px;
+    font-style: italic;
+}
+
+.form-group { margin-bottom: 22px; }
+
+.form-group label {
+    display: block;
+    font-family: var(--mono);
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray-700);
+    margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 14px;
+    font-family: var(--sans);
+    font-size: 14.5px;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--gray-300);
+    border-radius: 3px;
+    transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--teal-600);
+    background: var(--surface);
+    box-shadow: 0 0 0 3px var(--teal-50);
+}
+.form-group textarea {
+    resize: vertical;
+    min-height: 140px;
+    line-height: 1.6;
+}
+
+.submit-btn {
+    font-family: var(--sans);
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: var(--teal-800);
+    color: var(--white);
+    border: none;
+    padding: 14px 32px;
+    cursor: pointer;
+    transition: all 0.25s var(--ease);
+    border-radius: 3px;
+    display: inline-flex; align-items: center; gap: 10px;
+}
+[data-theme="dark"] .submit-btn { color: var(--paper); }
+
+.submit-btn:hover {
+    background: var(--teal-900);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+.submit-btn svg {
+    width: 14px; height: 14px;
+    stroke: currentColor; fill: none; stroke-width: 2;
+    transition: transform 0.25s;
+}
+.submit-btn:hover svg { transform: translateX(2px); }
+
+.form-note {
+    font-size: 12.5px;
+    color: var(--gray-500);
+    margin-top: 14px;
+    font-style: italic;
+}
+
+footer {
+    background: var(--ink);
+    color: var(--gray-300);
+    padding: 80px 32px 50px;
+    margin-top: 0;
+}
+[data-theme="dark"] footer {
+    background: #0a0a08;
+    border-top: 1px solid var(--gray-200);
+}
+
+.footer-inner {
+    max-width: 1400px; margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 48px;
+}
+@media (max-width: 768px) {
+    .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+}
+
+.footer-title {
+    font-family: var(--serif);
+    font-size: 20px; font-weight: 500;
+    color: #fff;
+    margin-bottom: 14px;
+    font-style: italic;
+    letter-spacing: -0.01em;
+}
+
+.footer-text {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: #b0ada5;
+}
+.footer-text a { color: var(--teal-400); text-decoration: none; }
+.footer-text a:hover { text-decoration: underline; }
+
+.footer-cite {
+    background: rgba(255,255,255,0.04);
+    padding: 18px 20px;
+    border-left: 2px solid var(--teal-600);
+    font-family: var(--mono);
+    font-size: 11.5px;
+    line-height: 1.7;
+    color: #c0bdb3;
+    margin-top: 18px;
+    border-radius: 2px;
+}
+.footer-cite em { color: #fff; font-family: var(--serif); font-size: 13px; font-style: italic; }
+
+.footer-links {
+    display: flex; flex-direction: column; gap: 10px;
+    font-size: 13.5px;
+}
+.footer-links a {
+    color: #b0ada5;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--teal-400); }
+
+.footer-small {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: #7a7770;
+    text-align: center;
+}
+
+@media (max-width: 1024px) {
+    .layout {
+        grid-template-columns: 1fr;
+        gap: 0;
+        padding-top: 0;
+    }
+    .sidenav { display: none; }
+    .mobile-nav-trigger { display: inline-flex; }
+    .mobile-nav-panel { display: block; }
+    .content { padding: 40px 0 80px; }
+    .hero { padding: 20px 0 60px; }
+}
+
+@media (max-width: 640px) {
+    .layout { padding: 0 20px; }
+    .topbar-inner { padding: 12px 20px; }
+    .top-actions a:not(.dl-btn) { display: none; }
+    .preamble { padding: 28px 24px; }
+    .preamble p { font-size: 17px; }
+    .form-wrap { padding: 28px 24px; }
+    .hero-meta { grid-template-columns: 1fr 1fr; gap: 20px; }
+    .phase-panel-title { font-size: 22px; }
+    .lifecycle-content { padding: 28px 20px; }
+}
+
+@media print {
+    .topbar, .sidenav, .mobile-nav-trigger, footer, .form-wrap, .scroll-progress { display: none; }
+    .layout { grid-template-columns: 1fr; padding-top: 0; }
+    body { background: white; color: black; }
+    .reveal, .reveal-stagger > * { opacity: 1 !important; transform: none !important; }
+    .phase-panel { display: block !important; page-break-inside: avoid; }
+    section { break-inside: avoid; padding: 20px 0; }
+    .commitment-toggle { display: none; }
+    a { color: black; text-decoration: underline; }
+}
+</style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<div class="topbar">
+    <div class="topbar-inner">
+        <a href="#top" class="brand">
+            <div class="brand-mark"></div>
+            <div class="brand-text">
+                <strong>Code of Professional Ethics</strong>
+                <small>AI Developers · IVF / PGT</small>
+            </div>
+        </a>
+        <div class="top-actions">
+            <button class="mobile-nav-trigger" id="mobileNavTrigger" aria-label="Open navigation">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <line x1="3" y1="12" x2="21" y2="12"/>
+                    <line x1="3" y1="18" x2="21" y2="18"/>
+                </svg>
+                <span>Contents</span>
+            </button>
+            <a href="#feedback">Feedback</a>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle color theme">
+                <svg id="themeIcon" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="4"/>
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+                </svg>
+                <span id="themeLabel">Dark</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="mobile-nav-panel" id="mobileNavPanel">
+    <div class="sidenav-label">Contents</div>
+    <ol id="mobileNavList"></ol>
+</div>
+
+<div class="layout" id="top">
+
+    <aside class="sidenav">
+        <div class="sidenav-label">Contents</div>
+        <ol>
+            <li><a href="#preamble" class="nav-link">Preamble</a></li>
+            <li><a href="#commitments" class="nav-link">Foundational Commitments</a></li>
+            <li><a href="#lifecycle" class="nav-link">Lifecycle Obligations</a></li>
+            <li><a href="#prohibited" class="nav-link">Prohibited Practices</a></li>
+            <li><a href="#accountability" class="nav-link">Accountability</a></li>
+            <li><a href="#appendix" class="nav-link">Appendix</a></li>
+            <li><a href="#references" class="nav-link">References</a></li>
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#feedback" class="nav-link">Feedback</a></li>
+        </ol>
+    </aside>
+
+    <main class="content">
+
+        <header class="hero">
+            <div class="hero-eyebrow reveal">Harvard Medical School · Center for Bioethics</div>
+            <h1 class="reveal">A Code of Professional Ethics for <em>AI&nbsp;Developers</em> <span class="thin">in Reproductive Embryo Selection Systems</span></h1>
+            <p class="hero-lede reveal">Translating medical professionalism into operational, enforceable obligations for the engineers who design and deploy artificial intelligence in in&nbsp;vitro fertilization and preimplantation genetic testing.</p>
+
+            <div class="hero-meta reveal-stagger">
+                <div class="hero-meta-item">
+                    <div class="label">Author</div>
+                    <div class="value">Rohan Dasari, BS</div>
+                </div>
+                <div class="hero-meta-item">
+                    <div class="label">Capstone Mentor</div>
+                    <div class="value">Insoo Hyun, PhD<small>The Hastings Center</small></div>
+                </div>
+                <div class="hero-meta-item">
+                    <div class="label">Program</div>
+                    <div class="value">Bioethics Capstone<small>Harvard Medical School</small></div>
+                </div>
+                <div class="hero-meta-item">
+                    <div class="label">Version</div>
+                    <div class="value">Draft 6<small>2026</small></div>
+                </div>
+            </div>
+
+            <div class="download-row reveal">
+                <a href="capstone-poster.pdf" class="dl-btn">
+                    <svg viewBox="0 0 24 24"><path d="M12 3v13m0 0l-5-5m5 5l5-5M5 21h14"/></svg>
+                    Download Poster
+                </a>
+                <a href="code-of-ethics-full.pdf" class="dl-btn">
+                    <svg viewBox="0 0 24 24"><path d="M12 3v13m0 0l-5-5m5 5l5-5M5 21h14"/></svg>
+                    Download Full Code
+                </a>
+            </div>
+        </header>
+
+        <section id="preamble">
+            <div class="section-header reveal">
+                <div class="section-number">Section 01 · Preamble</div>
+                <h2 class="section-title">Purpose, <em>scope</em>, and audience.</h2>
+            </div>
+            <div class="preamble reveal">
+                <p>This Code of Ethics provides ethical guidance for artificial intelligence developers who design and deploy machine learning systems for embryo selection, ranking, and polygenic risk scoring in in&nbsp;vitro fertilization (IVF) and preimplantation genetic testing (PGT) contexts.</p>
+                <p>Similar to the professional oaths and bioethical principles that guide physicians, this document outlines the professional duties of AI engineers in reproductive medicine. Although these developers do not practice medicine, the systems they build directly influence clinical decisions regarding embryo selection and the well-being of future children.</p>
+                <p>To ensure that innovations in IVF and PGT are deployed ethically and safely, AI developers shall subscribe to fiduciary standards of patient welfare, scientific integrity, and social responsibility.</p>
+            </div>
+        </section>
+
+        <section id="commitments">
+            <div class="section-header reveal">
+                <div class="section-number">Section 02 · Foundational Commitments</div>
+                <h2 class="section-title">Six commitments that <em>define</em> the developer's role.</h2>
+                <p class="section-intro">These overarching duties mirror the core principles of medical professionalism and establish the moral foundation for AI developers working in reproductive medicine. Each commitment is expandable.</p>
+            </div>
+
+            <div class="commitments reveal">
+
+                <details class="commitment">
+                    <summary class="commitment-header">
+                        <div class="commitment-num">I.</div>
+                        <div class="commitment-title">Responsible Embryo-Selection System Design</div>
+                        <div class="commitment-toggle"></div>
+                    </summary>
+                    <div class="commitment-body-content">
+                        <p class="commitment-statement">Developers <strong>shall</strong> place the welfare of patients and future children above all competing interests. No commercial objective or organizational pressure may override the developer's responsibility to avoid harm and act in the best interest of the patient.</p>
+                    </div>
+                </details>
+
+                <details class="commitment">
+                    <summary class="commitment-header">
+                        <div class="commitment-num">II.</div>
+                        <div class="commitment-title">Transparent Presentation of Embryo Risk Scores</div>
+                        <div class="commitment-toggle"></div>
+                    </summary>
+                    <div class="commitment-body-content">
+                        <p class="commitment-statement">Developers <strong>shall</strong> be honest and forthright about their AI system's capabilities and limitations. Polygenic risk scores and embryo rankings shall be presented as probabilistic — not deterministic — predictions. Developers shall meet this obligation by publishing a Model Summary documenting confidence intervals, predictive validity across populations, and relevant reproductive outcome benchmarks. Where proprietary constraints limit disclosure, developers shall obtain an independent third-party audit.</p>
+                    </div>
+                </details>
+
+                <details class="commitment">
+                    <summary class="commitment-header">
+                        <div class="commitment-num">III.</div>
+                        <div class="commitment-title">Support for Informed Reproductive Counseling</div>
+                        <div class="commitment-toggle"></div>
+                    </summary>
+                    <div class="commitment-body-content">
+                        <p class="commitment-statement">Developers <strong>shall</strong> design and release AI systems in a manner that enables clinicians and genetic counselors to accurately communicate what embryo risk scores do and do not represent. Outputs shall be interpretable, and accompanying documentation shall clarify intended use, limitations, and contraindications to support meaningful informed consent.</p>
+                    </div>
+                </details>
+
+                <details class="commitment">
+                    <summary class="commitment-header">
+                        <div class="commitment-num">IV.</div>
+                        <div class="commitment-title">Equity in Polygenic Prediction</div>
+                        <div class="commitment-toggle"></div>
+                    </summary>
+                    <div class="commitment-body-content">
+                        <p class="commitment-statement">Developers <strong>shall</strong> actively promote fairness and equity in the design and deployment of AI systems. Developers shall audit algorithms for population-specific performance disparities, document predictive validity across ancestry groups represented in training data, and refrain from deploying systems that perform unequally without disclosed mitigation strategies.</p>
+                    </div>
+                </details>
+
+                <details class="commitment">
+                    <summary class="commitment-header">
+                        <div class="commitment-num">V.</div>
+                        <div class="commitment-title">Scientific and Technical Integrity</div>
+                        <div class="commitment-toggle"></div>
+                    </summary>
+                    <div class="commitment-body-content">
+                        <p class="commitment-statement">Developers <strong>shall</strong> ground their work in sound science and accepted engineering practices. This includes reproducible model development, documented validation against retrospective datasets, calibration testing, and stability analysis. Developers shall not deploy systems for clinical use without evidence of technical performance appropriate to the intended use-case.</p>
+                    </div>
+                </details>
+
+                <details class="commitment">
+                    <summary class="commitment-header">
+                        <div class="commitment-num">VI.</div>
+                        <div class="commitment-title">Independence from Market Pressures</div>
+                        <div class="commitment-toggle"></div>
+                    </summary>
+                    <div class="commitment-body-content">
+                        <p class="commitment-statement">Developers <strong>shall</strong> identify and disclose conflicts of interest — whether from employers, partner organizations, or funders — that could compromise ethical judgment. Ethical decisions concerning embryo-selection systems shall be insulated from commercial incentives that might encourage premature deployment, overstated claims, or the concealment of known limitations.</p>
+                    </div>
+                </details>
+
+            </div>
+        </section>
+
+        <section id="lifecycle">
+            <div class="section-header reveal">
+                <div class="section-number">Section 03 · Lifecycle Obligations</div>
+                <h2 class="section-title">Four phases. <em>Four</em> sets of operational duties.</h2>
+                <p class="section-intro">The six commitments are translated into concrete obligations mapped to each stage of the AI development pipeline. Select a phase to see the corresponding obligations.</p>
+            </div>
+
+            <div class="lifecycle-wrap reveal">
+                <div class="lifecycle-phases" role="tablist" aria-label="Development lifecycle phases">
+                    <button class="phase-btn active" data-phase="1" role="tab" aria-selected="true">
+                        <span class="phase-btn-num">Phase 01</span>
+                        <span class="phase-btn-title">Data &amp; Model Design</span>
+                    </button>
+                    <button class="phase-btn" data-phase="2" role="tab" aria-selected="false">
+                        <span class="phase-btn-num">Phase 02</span>
+                        <span class="phase-btn-title">Validation &amp; Testing</span>
+                    </button>
+                    <button class="phase-btn" data-phase="3" role="tab" aria-selected="false">
+                        <span class="phase-btn-num">Phase 03</span>
+                        <span class="phase-btn-title">Deployment &amp; Use</span>
+                    </button>
+                    <button class="phase-btn" data-phase="4" role="tab" aria-selected="false">
+                        <span class="phase-btn-num">Phase 04</span>
+                        <span class="phase-btn-title">Monitoring &amp; Maintenance</span>
+                    </button>
+                </div>
+
+                <div class="lifecycle-content">
+                    <div class="phase-panel active" data-phase="1">
+                        <div class="phase-panel-header">
+                            <div class="phase-panel-label">Phase 01 · Data &amp; Model Design</div>
+                            <div class="phase-panel-title">Ground the system in representative data.</div>
+                        </div>
+                        <div class="phase-obligations">
+                            <div class="obligation"><span><strong>Use representative datasets.</strong> Developers shall use datasets representative of the populations in which the system is intended to be deployed.</span></div>
+                            <div class="obligation"><span><strong>Document provenance.</strong> Ancestry composition, clinical source, and known gaps in coverage shall be documented.</span></div>
+                            <div class="obligation"><span><strong>Justify trait inclusion.</strong> Inclusion of traits shall be justified by medical benefit — prevention of serious genetic disease or clinically meaningful reproductive outcomes — not by marketing appeal.</span></div>
+                        </div>
+                    </div>
+
+                    <div class="phase-panel" data-phase="2">
+                        <div class="phase-panel-header">
+                            <div class="phase-panel-label">Phase 02 · Validation &amp; Testing</div>
+                            <div class="phase-panel-title">Validate against what developers can control.</div>
+                        </div>
+                        <div class="phase-obligations">
+                            <div class="obligation"><span><strong>Retrospective validation.</strong> Developers shall validate systems against retrospective datasets prior to release.</span></div>
+                            <div class="obligation"><span><strong>Calibration &amp; reproducibility.</strong> Calibration testing, reproducibility analysis, and subgroup stability checks shall be performed and documented.</span></div>
+                            <div class="obligation"><span><strong>External validation.</strong> External validation across clinical sites and patient groups shall precede deployment.</span></div>
+                            <div class="obligation"><span><strong>Clinical-outcome validation is shared.</strong> Validation against clinical outcomes such as live birth rate is a shared responsibility, contingent on authorized data-sharing arrangements with clinical partners.</span></div>
+                        </div>
+                    </div>
+
+                    <div class="phase-panel" data-phase="3">
+                        <div class="phase-panel-header">
+                            <div class="phase-panel-label">Phase 03 · Deployment &amp; Use</div>
+                            <div class="phase-panel-title">Equip clinicians to use the system responsibly.</div>
+                        </div>
+                        <div class="phase-obligations">
+                            <div class="obligation"><span><strong>Role-specific training.</strong> Developers shall require and document training prior to use — for clinicians, embryologists, and genetic counselors — covering interpretation of uncertainty, contraindications, and common misuse patterns.</span></div>
+                            <div class="obligation"><span><strong>Human oversight.</strong> Systems shall be deployed with an appropriate human-oversight model, empirically evaluated for its effect on outcomes.</span></div>
+                            <div class="obligation"><span><strong>Regulatory clearance.</strong> No system shall be deployed clinically without ethical or regulatory clearance.</span></div>
+                            <div class="obligation"><span><strong>Marketing restraint.</strong> Marketing and presentation shall not overstate the model's capabilities.</span></div>
+                        </div>
+                    </div>
+
+                    <div class="phase-panel" data-phase="4">
+                        <div class="phase-panel-header">
+                            <div class="phase-panel-label">Phase 04 · Monitoring &amp; Maintenance</div>
+                            <div class="phase-panel-title">Track technical performance; partner on clinical outcomes.</div>
+                        </div>
+                        <div class="phase-obligations">
+                            <div class="obligation"><span><strong>Drift monitoring.</strong> Developers shall monitor technical performance drift post-deployment.</span></div>
+                            <div class="obligation"><span><strong>Periodic public reporting.</strong> Developers shall publish periodic updates on subgroup performance and corrective actions.</span></div>
+                            <div class="obligation"><span><strong>Withdrawal thresholds.</strong> Systems shall be suspended or withdrawn when minimum performance or equity thresholds are not met.</span></div>
+                            <div class="obligation"><span><strong>Clinical outcome monitoring is shared.</strong> Clinical outcome monitoring remains the responsibility of the deploying clinician; developers shall support this work where authorized data-sharing permits.</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="prohibited">
+            <div class="section-header reveal">
+                <div class="section-number">Section 04 · Prohibited Practices</div>
+                <h2 class="section-title">Practices <em>incompatible</em> with the Code.</h2>
+                <p class="section-intro">The following practices are strictly prohibited under this Code. Each prohibition is paired with a brief rationale grounded in the foundational commitments.</p>
+            </div>
+
+            <div class="prohibited-grid reveal-stagger">
+                <div class="prohibited-item">
+                    <div class="prohibited-label">Prohibition · 01</div>
+                    <h3 class="prohibited-title">Ranking embryos by non-medical traits</h3>
+                    <p class="prohibited-rationale"><strong>Rationale.</strong> Ranking embryos by traits unrelated to the prevention of serious genetic disease or clinically meaningful reproductive outcomes risks commodifying future persons, reinforces social stratification, and exceeds the clinical mandate of reproductive medicine.</p>
+                </div>
+                <div class="prohibited-item">
+                    <div class="prohibited-label">Prohibition · 02</div>
+                    <h3 class="prohibited-title">Deployment without documented validation</h3>
+                    <p class="prohibited-rationale"><strong>Rationale.</strong> Marketing or clinical integration without documented validation criteria and performance benchmarks exposes patients to unquantified risk and violates standards of scientific integrity and non-maleficence.</p>
+                </div>
+                <div class="prohibited-item">
+                    <div class="prohibited-label">Prohibition · 03</div>
+                    <h3 class="prohibited-title">Deterministic claims about probabilistic outputs</h3>
+                    <p class="prohibited-rationale"><strong>Rationale.</strong> Representing probabilistic polygenic scores as deterministic predictions or guarantees undermines informed consent and distorts reproductive decision-making.</p>
+                </div>
+                <div class="prohibited-item">
+                    <div class="prohibited-label">Prohibition · 04</div>
+                    <h3 class="prohibited-title">Concealment of known limitations</h3>
+                    <p class="prohibited-rationale"><strong>Rationale.</strong> Obscuring known limitations in training-data composition, population-specific predictive gaps, or material model instability perpetuates inequity and prevents clinicians from appropriately contextualizing risk.</p>
+                </div>
+                <div class="prohibited-item">
+                    <div class="prohibited-label">Prohibition · 05</div>
+                    <h3 class="prohibited-title">"Research-only" labeling used to evade oversight</h3>
+                    <p class="prohibited-rationale"><strong>Rationale.</strong> Labeling systems as "research-only" while knowingly facilitating clinical decision use circumvents regulatory safeguards and shifts unacknowledged risk onto patients and clinicians.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="accountability">
+            <div class="section-header reveal">
+                <div class="section-number">Section 05 · Accountability &amp; Oversight</div>
+                <h2 class="section-title">Mechanisms that make the Code <em>enforceable</em>.</h2>
+                <p class="section-intro">Ethical obligations are credible only insofar as they can be documented, audited, and acted upon. The following mechanisms support enforcement within developer organizations and across the profession.</p>
+            </div>
+
+            <div class="accountability-list reveal">
+                <div class="accountability-item">
+                    <div>
+                        <h4>Published Model Summary</h4>
+                        <p>Developers shall maintain and publish a Model Summary documenting validation datasets, calibration results, subgroup performance, intended use-cases, and known limitations.</p>
+                    </div>
+                </div>
+                <div class="accountability-item">
+                    <div>
+                        <h4>Independent third-party audit</h4>
+                        <p>Where proprietary constraints prevent full disclosure, developers shall commission independent technical audits at defined intervals and disclose summary findings to clinical partners and regulators.</p>
+                    </div>
+                </div>
+                <div class="accountability-item">
+                    <div>
+                        <h4>Conflict-of-interest disclosure</h4>
+                        <p>Developers shall maintain disclosures covering employer, organizational, and funder relationships, and update them when material changes occur.</p>
+                    </div>
+                </div>
+                <div class="accountability-item">
+                    <div>
+                        <h4>Suspension and withdrawal protocols</h4>
+                        <p>Developers shall define, in advance, the performance and equity thresholds that trigger suspension or withdrawal of a deployed system, and shall document the decision process when such thresholds are reached.</p>
+                    </div>
+                </div>
+                <div class="accountability-item">
+                    <div>
+                        <h4>Interdisciplinary ethics review</h4>
+                        <p>Developers shall seek interdisciplinary review — involving clinicians, bioethicists, and affected communities where feasible — at key decision points in the development lifecycle.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="appendix">
+            <div class="section-header reveal">
+                <div class="section-number">Appendix · Rationales &amp; Literature</div>
+                <h2 class="section-title">Sources <em>grounding</em> the Code.</h2>
+                <p class="section-intro">The foundational commitments draw on established bioethics scholarship, existing medical professionalism frameworks, and empirical evidence regarding AI in reproductive medicine.</p>
+            </div>
+
+            <div class="appendix-list reveal-stagger">
+                <div class="appendix-item">
+                    <h4>Commitment I · Responsible Embryo-Selection System Design</h4>
+                    <p>Grounded in the <span class="cite">ABIM Physician Charter (2002)</span>, which identifies patient welfare as the cornerstone of medical professionalism. <span class="cite">Cohen et&nbsp;al. (2025)</span> documents how AI tools in reproductive medicine remain clinically unproven and may mislead patients if adopted prematurely.</p>
+                </div>
+                <div class="appendix-item">
+                    <h4>Commitment II · Transparent Presentation of Embryo Risk Scores</h4>
+                    <p>The <span class="cite">ASRM Ethics Committee (2025)</span> highlights how polygenic scores in PGT are frequently overstated, reinforcing the need for clear communication of predictive limits. <span class="cite">Munsie &amp; Hyun (2014)</span> describes stem-cell tourism as a cautionary precedent in which opacity enabled exploitation and overhyped therapeutic claims.</p>
+                </div>
+                <div class="appendix-item">
+                    <h4>Commitment III · Support for Informed Reproductive Counseling</h4>
+                    <p><span class="cite">Griffin et&nbsp;al. (2024)</span> shows that developers frequently underestimate downstream effects of their systems on patient autonomy when outputs are not interpretable. <span class="cite">Koplin et&nbsp;al. (2025)</span> and <span class="cite">Aufieri &amp; Mastrocola (2025)</span> document how limited transparency impairs informed consent and patient decision-making.</p>
+                </div>
+                <div class="appendix-item">
+                    <h4>Commitment IV · Equity in Polygenic Prediction</h4>
+                    <p><span class="cite">Haining et&nbsp;al. (2025)</span> raises concerns about racial disparities in polygenic risk score predictive validity. <span class="cite">Koplin et&nbsp;al. (2025)</span> supports the need for professional norms to protect against bias in reproductive AI.</p>
+                </div>
+                <div class="appendix-item">
+                    <h4>Commitment V · Scientific and Technical Integrity</h4>
+                    <p><span class="cite">Thirumalaraju et&nbsp;al. (2025)</span> provides direct evidence of model instability and reproducibility problems, illustrating how premature deployment undermines scientific rigor. <span class="cite">Cohen et&nbsp;al. (2025)</span> and <span class="cite">Haining et&nbsp;al. (2025)</span> argue for stronger regulatory frameworks and evidentiary thresholds before deployment.</p>
+                </div>
+                <div class="appendix-item">
+                    <h4>Commitment VI · Independence from Market Pressures</h4>
+                    <p><span class="cite">Munsie &amp; Hyun (2014)</span> documents how commercial incentives in the stem-cell industry produced an ethical collapse, emphasizing the need to insulate ethical judgment from commercialization pressures.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="references">
+            <div class="section-header reveal">
+                <div class="section-number">Bibliography</div>
+                <h2 class="section-title">References.</h2>
+            </div>
+
+            <ol class="references-list reveal">
+                <li>American Board of Internal Medicine Foundation, American College of Physicians Foundation, European Federation of Internal Medicine. (2002). Medical professionalism in the new millennium: A physician charter. <em>Annals of Internal Medicine, 136</em>(3), 243–246.</li>
+                <li>ASRM Ethics Committee. (2025). Ethical considerations of preimplantation genetic testing for polygenic risk. <em>Fertility and Sterility</em>.</li>
+                <li>Aufieri, R., &amp; Mastrocola, L. (2025). Informed consent and polygenic embryo screening: Current challenges. <em>Journal of Medical Ethics</em>.</li>
+                <li>Cohen, I. G., et al. (2025). AI in reproductive medicine: Clinical integration ahead of evidence. <em>New England Journal of Medicine</em>.</li>
+                <li>Griffin, D. K., et al. (2024). Developer blind spots in reproductive AI: Autonomy, interpretability, and downstream effects. <em>AI and Ethics</em>.</li>
+                <li>Haining, C. M., et al. (2025). Racial disparities in polygenic risk score predictive validity: Implications for embryo selection. <em>Genetics in Medicine</em>.</li>
+                <li>Koplin, J. J., et al. (2025). Professional norms for bias mitigation in reproductive AI systems. <em>American Journal of Bioethics</em>.</li>
+                <li>Munsie, M., &amp; Hyun, I. (2014). A question of ethics: Selling autologous stem cell therapies flaunts professional standards. <em>Stem Cell Research, 13</em>(3), 647–653.</li>
+                <li>Thirumalaraju, P., et al. (2025). Model instability and reproducibility in embryo-selection AI. <em>Nature Medicine</em>.</li>
+            </ol>
+        </section>
+
+        <section id="about">
+            <div class="section-header reveal">
+                <div class="section-number">About</div>
+                <h2 class="section-title">The Capstone and its <em>contributors</em>.</h2>
+            </div>
+
+            <div class="about-grid reveal">
+                <div class="about-block">
+                    <h4>Author</h4>
+                    <p>Rohan Dasari is a student in the Harvard Medical School Center for Bioethics. This Code was developed as his Bioethics Capstone Project, translating principles of medical professionalism into operational obligations for AI developers working in IVF and PGT.</p>
+
+                    <h4 style="margin-top:28px;">Capstone Mentor</h4>
+                    <p>Dr. Insoo Hyun, Senior Researcher at The Hastings Center and Director of the Center for Life Sciences and Public Learning at the Museum of Science, Boston, mentored this project and shaped its emphasis on enforceability, role separation, and operational scope.</p>
+                </div>
+
+                <div class="about-block">
+                    <h4>Acknowledgements</h4>
+                    <p class="acks">Special thanks to Dr. Insoo Hyun, Dr. Lisa Moses, Professor Kimberly Serpico, Dr. Charles Bormann, Dr. Benjamin Silverman, and Professor I. Glenn Cohen for their valuable guidance and feedback throughout the development of this Capstone project.</p>
+
+                    <h4 style="margin-top:28px;">Limitations</h4>
+                    <p>Stakeholder consultations were informal. The Code has not yet been empirically validated through formal stakeholder review — for example, a Delphi survey — or tested for adoption in industry or professional society settings. These are among the next steps for the project.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="feedback">
+            <div class="section-header reveal">
+                <div class="section-number">Stakeholder Review</div>
+                <h2 class="section-title">Share <em>feedback</em> on the Code.</h2>
+                <p class="section-intro">This Code is intended to serve as the basis for future stakeholder review. Feedback from clinicians, AI developers, bioethicists, genetic counselors, patients, and professional society representatives is welcomed and will inform subsequent revisions.</p>
+            </div>
+
+            <div class="form-wrap reveal">
+                <p class="form-intro">All submissions are reviewed; substantive contributions may be acknowledged in future revisions with your permission.</p>
+
+                <form action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="affiliation">Affiliation &amp; Role</label>
+                        <input type="text" id="affiliation" name="affiliation" placeholder="e.g., Embryologist, Massachusetts General Hospital" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="stakeholder-type">Stakeholder Category</label>
+                        <select id="stakeholder-type" name="stakeholder_type" required>
+                            <option value="">— Select —</option>
+                            <option>AI / ML Developer</option>
+                            <option>Clinician (REI / OB-GYN)</option>
+                            <option>Embryologist</option>
+                            <option>Genetic Counselor</option>
+                            <option>Bioethicist / Philosopher</option>
+                            <option>Legal / Policy Scholar</option>
+                            <option>Patient / Patient Advocate</option>
+                            <option>Professional Society Representative</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="section">Section addressed</label>
+                        <select id="section" name="section">
+                            <option value="">— Optional —</option>
+                            <option>Preamble</option>
+                            <option>Commitment I — Responsible System Design</option>
+                            <option>Commitment II — Transparent Risk Scores</option>
+                            <option>Commitment III — Informed Counseling</option>
+                            <option>Commitment IV — Equity in Prediction</option>
+                            <option>Commitment V — Scientific Integrity</option>
+                            <option>Commitment VI — Independence from Market Pressures</option>
+                            <option>Lifecycle Obligations</option>
+                            <option>Prohibited Practices</option>
+                            <option>Accountability &amp; Oversight</option>
+                            <option>General / Structural</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="comments">Feedback</label>
+                        <textarea id="comments" name="comments" placeholder="Substantive feedback, proposed revisions, or concerns. References welcome." required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="attribution">May your feedback be acknowledged?</label>
+                        <select id="attribution" name="attribution">
+                            <option>Yes — name and affiliation</option>
+                            <option>Yes — affiliation only</option>
+                            <option>No — anonymous</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        Submit Feedback
+                        <svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                    </button>
+                    <p class="form-note">Responses are emailed directly to the author. No data is stored on this site.</p>
+                </form>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<footer>
+    <div class="footer-inner">
+        <div>
+            <div class="footer-title">Code of Professional Ethics for AI Developers in Reproductive Embryo Selection Systems</div>
+            <p class="footer-text">A Bioethics Capstone Project · Harvard Medical School Center for Bioethics · Mentored by Dr. Insoo Hyun, The Hastings Center · 2026.</p>
+            <div class="footer-cite">
+                Suggested citation<br>
+                Dasari, R. (2026). <em>Code of Professional Ethics for AI Developers in Reproductive Embryo Selection Systems</em> (Draft 6). Harvard Medical School Center for Bioethics.
+            </div>
+        </div>
+        <div>
+            <div class="footer-title">Navigate</div>
+            <div class="footer-links">
+                <a href="#preamble">Preamble</a>
+                <a href="#commitments">Commitments</a>
+                <a href="#lifecycle">Lifecycle</a>
+                <a href="#prohibited">Prohibitions</a>
+                <a href="#references">References</a>
+            </div>
+        </div>
+        <div>
+            <div class="footer-title">Engage</div>
+            <div class="footer-links">
+                <a href="#feedback">Submit feedback</a>
+                <a href="code-of-ethics-full.pdf">Download full Code</a>
+                <a href="capstone-poster.pdf">Download poster</a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-small">© 2026 Rohan Dasari · Draft 6</div>
+</footer>
+
+<script>
+// Scroll progress bar
+const progress = document.getElementById('scrollProgress');
+function updateProgress() {
+    const scrolled = window.scrollY;
+    const height = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.width = ((scrolled / height) * 100) + '%';
+}
+window.addEventListener('scroll', updateProgress, { passive: true });
+updateProgress();
+
+// Scroll reveal
+const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+            io.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => io.observe(el));
+
+// Active sidenav highlight
+const navLinks = document.querySelectorAll('.nav-link');
+const sections = Array.from(navLinks).map(l => document.querySelector(l.getAttribute('href'))).filter(Boolean);
+
+function updateActiveNav() {
+    const scrollPos = window.scrollY + 120;
+    let active = sections[0];
+    for (const s of sections) {
+        if (s.offsetTop <= scrollPos) active = s;
+    }
+    navLinks.forEach(l => {
+        l.classList.toggle('active', l.getAttribute('href') === '#' + active.id);
+    });
+}
+window.addEventListener('scroll', updateActiveNav, { passive: true });
+updateActiveNav();
+
+// Lifecycle phases
+const phaseBtns = document.querySelectorAll('.phase-btn');
+const phasePanels = document.querySelectorAll('.phase-panel');
+
+phaseBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const phase = btn.dataset.phase;
+        phaseBtns.forEach(b => {
+            b.classList.toggle('active', b === btn);
+            b.setAttribute('aria-selected', b === btn);
+        });
+        phasePanels.forEach(p => p.classList.toggle('active', p.dataset.phase === phase));
+    });
+});
+
+// Keyboard nav for phases
+phaseBtns.forEach((btn, i) => {
+    btn.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+            e.preventDefault();
+            const next = phaseBtns[(i + 1) % phaseBtns.length];
+            next.click(); next.focus();
+        } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+            e.preventDefault();
+            const prev = phaseBtns[(i - 1 + phaseBtns.length) % phaseBtns.length];
+            prev.click(); prev.focus();
+        }
+    });
+});
+
+// Theme toggle
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon = document.getElementById('themeIcon');
+const themeLabel = document.getElementById('themeLabel');
+const html = document.documentElement;
+
+const sunPath = '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>';
+const moonPath = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+
+function applyTheme(t) {
+    html.setAttribute('data-theme', t);
+    themeIcon.innerHTML = t === 'dark' ? sunPath : moonPath;
+    themeLabel.textContent = t === 'dark' ? 'Light' : 'Dark';
+}
+
+try {
+    const savedTheme = localStorage.getItem('theme-pref') || 'light';
+    applyTheme(savedTheme);
+} catch(e) { applyTheme('light'); }
+
+themeToggle.addEventListener('click', () => {
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    applyTheme(next);
+    try { localStorage.setItem('theme-pref', next); } catch(e) {}
+});
+
+// Mobile nav
+const mobileTrigger = document.getElementById('mobileNavTrigger');
+const mobilePanel = document.getElementById('mobileNavPanel');
+const mobileList = document.getElementById('mobileNavList');
+
+document.querySelectorAll('.sidenav ol li a').forEach((a) => {
+    const li = document.createElement('li');
+    const newA = a.cloneNode(true);
+    newA.classList.add('nav-link');
+    li.appendChild(newA);
+    mobileList.appendChild(li);
+});
+
+const mobileStyle = document.createElement('style');
+mobileStyle.textContent = `
+#mobileNavList { list-style: none; counter-reset: section; }
+#mobileNavList li { counter-increment: section; }
+#mobileNavList a {
+    display: flex; align-items: baseline; gap: 12px;
+    padding: 12px 14px;
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--gray-500);
+    text-decoration: none;
+    border-left: 1.5px solid var(--gray-200);
+}
+#mobileNavList a::before {
+    content: counter(section, decimal-leading-zero);
+    font-family: var(--mono); font-size: 10px; color: var(--gray-400);
+    letter-spacing: 0.05em;
+}
+#mobileNavList a.active { color: var(--teal-800); border-left-color: var(--teal-600); background: var(--teal-50); }
+`;
+document.head.appendChild(mobileStyle);
+
+mobileTrigger?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    mobilePanel.classList.toggle('open');
+});
+
+mobilePanel.addEventListener('click', (e) => {
+    if (e.target.tagName === 'A') {
+        setTimeout(() => mobilePanel.classList.remove('open'), 100);
+    }
+});
+
+document.addEventListener('click', (e) => {
+    if (!mobilePanel.contains(e.target) && !mobileTrigger?.contains(e.target)) {
+        mobilePanel.classList.remove('open');
+    }
+});
+</script>
+
+</body>
+</html>
