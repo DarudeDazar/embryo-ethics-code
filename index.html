@@ -199,6 +199,24 @@ body::before {
 }
 .top-actions a.feedback-link:hover { background: var(--teal-600); color: #fff; }
 
+/* Companion essay link in topbar */
+.top-actions a.case-link {
+    color: var(--teal-800);
+    border: 1px solid var(--teal-100);
+    background: var(--teal-50);
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    transition: all 0.2s;
+}
+.top-actions a.case-link:hover {
+    border-color: var(--teal-400);
+    color: var(--teal-900);
+}
+[data-theme="dark"] .top-actions a.case-link:hover { color: var(--teal-400); }
+
 .theme-toggle {
     background: none;
     border: 1px solid var(--gray-300);
@@ -1164,6 +1182,7 @@ footer {
                 </svg>
                 <span>Contents</span>
             </button>
+            <a href="case-study.html" class="case-link">The Field in Practice ↗</a>
             <a href="#feedback" class="feedback-link">Submit Stakeholder Feedback</a>
             <button class="theme-toggle" id="themeToggle" aria-label="Toggle color theme">
                 <svg id="themeIcon" viewBox="0 0 24 24">
@@ -1689,14 +1708,9 @@ footer {
                 <div class="about-block">
                     <h4>Acknowledgements</h4>
                     <p class="acks">Special thanks to Dr. Insoo Hyun, Dr. Lisa Moses, Professor Kimberly Serpico, Dr. Charles Bormann, Dr. Benjamin Silverman, and Professor I. Glenn Cohen for their valuable guidance and feedback throughout the development of this Capstone project.</p>
-
-                    <h4 style="margin-top:28px;">Limitations</h4>
-                    <p>Stakeholder consultations were conducted informally. This Code has not yet been empirically validated through formal stakeholder review — for example, a Delphi survey — or tested for adoption in industry or professional society settings. Professional codes derive their normative weight through stakeholder buy-in, iterative revision, and, ideally, endorsement by a professional society. This Code is offered as a starting point for that process, not a finished standard. These are among the next steps for the project.</p>
                 </div>
             </div>
         </section>
-
-        <!-- FEEDBACK -->
 
     </main>
 </div>
@@ -1718,6 +1732,7 @@ footer {
                 <a href="#commitments">Commitments</a>
                 <a href="#lifecycle">Lifecycle</a>
                 <a href="#prohibited">Prohibitions</a>
+                <a href="case-study.html">The Field in Practice ↗</a>
                 <a href="#references">References</a>
             </div>
         </div>

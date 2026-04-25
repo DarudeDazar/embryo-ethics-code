@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Field in Practice · Nucleus Genomics and the Case for an AI Developer Code of Ethics</title>
+<meta name="description" content="A descriptive look at AI-enabled embryo selection in commercial practice — how Nucleus Genomics and similar companies have reached the public, the science underpinning these systems, and the regulatory framework that governs them.">
+<meta name="author" content="Rohan Dasari">
+
+<meta property="og:title" content="The Field in Practice · Nucleus Genomics and the Case for an AI Developer Code of Ethics">
+<meta property="og:description" content="A descriptive look at AI-enabled embryo selection in commercial practice.">
+<meta property="og:type" content="article">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --teal-950: #062f24;
+    --teal-900: #0a4a3a;
+    --teal-800: #0F6E56;
+    --teal-600: #1D9E75;
+    --teal-400: #5DCAA5;
+    --teal-100: #E1F5EE;
+    --teal-50:  #F3FBF8;
+
+    --ink:       #141413;
+    --ink-soft:  #2a2a28;
+    --gray-700:  #4a4a48;
+    --gray-500:  #787874;
+    --gray-400:  #a8a8a4;
+    --gray-300:  #d0d0ca;
+    --gray-200:  #e8e8e2;
+    --gray-100:  #f2f2ec;
+    --paper:     #faf8f2;
+    --paper-alt: #f4f2ea;
+    --white:     #ffffff;
+    --surface:   #ffffff;
+
+    --prohibit:    #C0152A;
+    --prohibit-bg: #fef0f1;
+
+    --serif: 'Fraunces', 'Cormorant Garamond', Georgia, serif;
+    --sans:  'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+    --mono:  'IBM Plex Mono', 'Courier New', monospace;
+
+    --content-max: 760px;
+
+    --shadow-sm: 0 1px 2px rgba(20,20,19,0.04), 0 1px 3px rgba(20,20,19,0.03);
+    --shadow-md: 0 4px 16px rgba(20,20,19,0.06), 0 1px 4px rgba(20,20,19,0.04);
+    --shadow-lg: 0 12px 40px rgba(20,20,19,0.08), 0 4px 12px rgba(20,20,19,0.04);
+
+    --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="dark"] {
+    --ink:       #f0ede5;
+    --ink-soft:  #e2dfd6;
+    --gray-700:  #b8b5ac;
+    --gray-500:  #8a8781;
+    --gray-400:  #6a6762;
+    --gray-300:  #4a4742;
+    --gray-200:  #333330;
+    --gray-100:  #242421;
+    --paper:     #161614;
+    --paper-alt: #1c1c1a;
+    --white:     #1f1f1c;
+    --surface:   #1f1f1c;
+
+    --teal-800: #35b98a;
+    --teal-600: #5DCAA5;
+    --teal-100: #0f3d2f;
+    --teal-50:  #0a2d22;
+
+    --prohibit:    #f05060;
+    --prohibit-bg: #2a1215;
+
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
+    --shadow-md: 0 4px 16px rgba(0,0,0,0.3);
+    --shadow-lg: 0 12px 40px rgba(0,0,0,0.4);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+body {
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    background: var(--paper);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+    transition: background 0.4s var(--ease), color 0.4s var(--ease);
+}
+
+::selection { background: var(--teal-400); color: var(--ink); }
+
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.4;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+}
+[data-theme="dark"] body::before { mix-blend-mode: screen; opacity: 0.3; }
+
+.scroll-progress {
+    position: fixed; top: 0; left: 0;
+    height: 2px; width: 0%;
+    background: linear-gradient(90deg, var(--teal-600), var(--teal-400));
+    z-index: 1000;
+    transition: width 0.1s linear;
+}
+
+/* ── Topbar ── */
+.topbar {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(250, 248, 242, 0.82);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border-bottom: 1px solid var(--gray-200);
+    transition: background 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+[data-theme="dark"] .topbar { background: rgba(22, 22, 20, 0.82); }
+
+.topbar-inner {
+    max-width: 1200px; margin: 0 auto;
+    padding: 14px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 24px;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--gray-700);
+    text-decoration: none;
+    letter-spacing: 0.005em;
+    transition: color 0.2s;
+}
+.back-link:hover { color: var(--teal-800); }
+.back-link::before { content: '←'; font-size: 14px; }
+
+.brand-mini {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--gray-500);
+    letter-spacing: 0.01em;
+}
+
+.top-actions { display: flex; align-items: center; gap: 14px; }
+
+.theme-toggle {
+    background: none;
+    border: 1px solid var(--gray-300);
+    border-radius: 100px;
+    padding: 6px 14px 6px 10px;
+    font-family: var(--sans);
+    font-size: 12px;
+    color: var(--gray-700);
+    cursor: pointer;
+    display: flex; align-items: center; gap: 6px;
+    transition: all 0.2s;
+}
+.theme-toggle:hover { border-color: var(--teal-600); color: var(--teal-800); }
+.theme-toggle svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 1.8; }
+
+/* ── Layout ── */
+.page {
+    max-width: var(--content-max);
+    margin: 0 auto;
+    padding: 100px 32px 0;
+    position: relative;
+    z-index: 2;
+}
+
+/* ── Hero ── */
+.hero {
+    padding: 32px 0 48px;
+    border-bottom: 1px solid var(--gray-200);
+    margin-bottom: 56px;
+}
+
+.hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--teal-800);
+    margin-bottom: 18px;
+}
+
+.hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3.6vw, 2.8rem);
+    font-weight: 400;
+    line-height: 1.18;
+    color: var(--ink);
+    letter-spacing: -0.025em;
+    margin-bottom: 22px;
+}
+
+.hero h1 em { font-style: italic; color: var(--teal-800); }
+
+.hero-lede {
+    font-size: 1.05rem;
+    line-height: 1.72;
+    color: var(--gray-700);
+    max-width: 60ch;
+    margin-bottom: 24px;
+}
+
+.hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px 28px;
+    font-size: 13px;
+    color: var(--gray-500);
+    font-family: var(--sans);
+}
+.hero-meta strong { color: var(--ink); font-weight: 500; }
+
+/* ── Reveal animation ── */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out); }
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+/* ── Case Study Blocks ── */
+.case-disclaimer {
+    background: #fdf6ee;
+    border: 1px solid #f0d9b5;
+    border-left: 3px solid #c07828;
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin-bottom: 56px;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--gray-700);
+}
+[data-theme="dark"] .case-disclaimer {
+    background: #1e1a12;
+    border-color: #3a2e1a;
+    border-left-color: #c8962a;
+}
+.case-disclaimer strong { color: #8a5c1a; }
+[data-theme="dark"] .case-disclaimer strong { color: #c8962a; }
+
+.case-block { margin-bottom: 64px; }
+
+.case-block-heading {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.015em;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.case-block p {
+    font-size: 0.975rem;
+    line-height: 1.78;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+}
+.case-block p:last-child { margin-bottom: 0; }
+
+.case-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 22px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.case-bullets li {
+    display: flex;
+    gap: 14px;
+    font-size: 0.95rem;
+    line-height: 1.72;
+    color: var(--ink-soft);
+}
+
+.case-bullets li::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--teal-400);
+    flex-shrink: 0;
+    margin-top: 9px;
+}
+
+.case-bullets li sup {
+    color: var(--teal-800);
+    font-weight: 600;
+    font-size: 0.7rem;
+    margin-left: 2px;
+}
+.case-bullets li sup a { color: var(--teal-800); text-decoration: none; }
+.case-bullets li sup a:hover { text-decoration: underline; }
+
+.case-figure {
+    margin: 36px 0 40px;
+}
+
+.case-figure img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: 1px solid var(--gray-200);
+    display: block;
+}
+
+.case-figure figcaption {
+    font-family: var(--sans);
+    font-size: 0.825rem;
+    line-height: 1.6;
+    color: var(--gray-500);
+    margin-top: 14px;
+    padding-left: 14px;
+    border-left: 2px solid var(--gray-300);
+}
+.case-figure figcaption em { color: var(--gray-700); }
+
+.case-pullquote {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    line-height: 1.5;
+    font-style: italic;
+    color: var(--teal-900);
+    padding: 22px 26px;
+    border-left: 3px solid var(--teal-600);
+    background: var(--teal-50);
+    border-radius: 0 8px 8px 0;
+    margin: 32px 0;
+}
+[data-theme="dark"] .case-pullquote { color: var(--teal-400); }
+
+.case-pullquote cite {
+    display: block;
+    font-style: normal;
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    color: var(--gray-500);
+    margin-top: 10px;
+    letter-spacing: 0.01em;
+}
+
+.case-comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 28px 0;
+}
+
+.case-comparison-card {
+    padding: 20px 22px;
+    border-radius: 10px;
+    border: 1px solid;
+}
+
+.case-comparison-card.does {
+    background: var(--teal-50);
+    border-color: var(--teal-100);
+}
+.case-comparison-card.does-not {
+    background: var(--prohibit-bg);
+    border-color: rgba(192,21,42,0.15);
+}
+
+.case-comparison-card h5 {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+.case-comparison-card.does h5 { color: var(--teal-800); }
+.case-comparison-card.does-not h5 { color: var(--prohibit); }
+
+.case-comparison-card ul { list-style: none; padding: 0; }
+
+.case-comparison-card li {
+    font-size: 0.875rem;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    padding: 5px 0;
+}
+.case-comparison-card li::before {
+    content: '— ';
+    color: var(--gray-400);
+}
+
+.case-mapping {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 24px 0;
+}
+
+.case-mapping-row {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 18px;
+    padding: 16px 20px;
+    background: var(--surface);
+    border: 1px solid var(--gray-200);
+    border-radius: 10px;
+    align-items: center;
+}
+
+.case-mapping-row .observed {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--ink-soft);
+}
+
+.case-mapping-row .provision {
+    font-size: 0.825rem;
+    line-height: 1.5;
+    color: var(--teal-800);
+    font-weight: 500;
+    padding-left: 16px;
+    border-left: 2px solid var(--teal-400);
+}
+
+/* ── Closing CTA ── */
+.case-cta {
+    margin: 64px 0 48px;
+    padding: 32px;
+    background: var(--teal-50);
+    border: 1px solid var(--teal-100);
+    border-radius: 12px;
+    text-align: center;
+}
+
+.case-cta h3 {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--teal-900);
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+}
+[data-theme="dark"] .case-cta h3 { color: var(--teal-400); }
+
+.case-cta p {
+    font-size: 0.925rem;
+    color: var(--gray-700);
+    line-height: 1.6;
+    margin-bottom: 20px;
+    max-width: 50ch;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.case-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--teal-800);
+    color: #fff;
+    padding: 12px 26px;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+.case-cta-btn:hover { background: var(--teal-600); }
+
+/* ── References ── */
+.case-references {
+    margin-top: 56px;
+    padding-top: 32px;
+    border-top: 1px solid var(--gray-200);
+}
+
+.case-references-heading {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gray-500);
+    margin-bottom: 22px;
+}
+
+.case-references ol {
+    padding-left: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.case-references li {
+    font-size: 0.825rem;
+    line-height: 1.65;
+    color: var(--gray-700);
+}
+
+.case-references li:target {
+    background: var(--teal-50);
+    padding: 8px 10px;
+    border-radius: 4px;
+    margin-left: -10px;
+}
+
+.case-references em { font-style: italic; }
+
+/* ── Footer ── */
+footer {
+    background: var(--paper-alt);
+    border-top: 1px solid var(--gray-200);
+    margin-top: 80px;
+    padding: 40px 0 24px;
+    position: relative;
+    z-index: 2;
+}
+
+.footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--gray-700);
+}
+.footer-inner a { color: var(--teal-800); text-decoration: none; }
+.footer-inner a:hover { text-decoration: underline; }
+
+.footer-small {
+    max-width: 1200px;
+    margin: 24px auto 0;
+    padding: 24px 32px 0;
+    border-top: 1px solid var(--gray-200);
+    font-size: 12px;
+    color: var(--gray-500);
+}
+
+/* ── Responsive ── */
+@media (max-width: 700px) {
+    .page { padding: 90px 22px 0; }
+    .topbar-inner { padding: 12px 22px; }
+    .brand-mini { display: none; }
+    .case-comparison { grid-template-columns: 1fr; }
+    .case-mapping-row { grid-template-columns: 1fr; gap: 8px; }
+    .case-mapping-row .provision { padding-left: 0; border-left: none; padding-top: 8px; border-top: 1px solid var(--gray-200); }
+}
+</style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<div class="topbar">
+    <div class="topbar-inner">
+        <a href="index.html" class="back-link">Back to the Code of Ethics</a>
+        <span class="brand-mini">The Field in Practice</span>
+        <div class="top-actions">
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle color theme">
+                <svg id="themeIcon" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="4"/>
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+                </svg>
+                <span id="themeLabel">Dark</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="page">
+
+    <header class="hero reveal">
+        <div class="hero-eyebrow">Companion Essay · Harvard Medical School Center for Bioethics</div>
+        <h1>The Field in Practice: <em>Nucleus Genomics</em> and the case for an AI Developer Code of Ethics.</h1>
+        <p class="hero-lede">A descriptive look at how AI-enabled embryo selection has reached the public, the science underpinning these systems, and the regulatory framework that governs them.</p>
+        <div class="hero-meta">
+            <span><strong>Author:</strong> Rohan Dasari, BS</span>
+            <span><strong>Capstone Mentor:</strong> Insoo Hyun, PhD</span>
+            <span><strong>April 2026</strong></span>
+        </div>
+    </header>
+
+    <div class="case-disclaimer reveal">
+        <strong>A note on framing.</strong> This page draws on publicly available information and peer-reviewed scholarship. It is offered as descriptive commentary on the broader field of AI-enabled embryo trait selection — not as a verdict on any single company. Nucleus Genomics is one of several companies operating in this space, including Genomic Prediction, Orchid Health, MyOme, and Herasight.<sup><a href="#cite-capalbo-2024">1</a></sup>
+    </div>
+
+    <!-- 1. Why this page exists -->
+    <div class="case-block reveal">
+        <h3 class="case-block-heading">Why this page exists</h3>
+
+        <p>The clinical and commercial integration of artificial intelligence (AI) into reproductive medicine is poised to revolutionize the fields of in vitro fertilization (IVF) and preimplantation genetic testing (PGT).</p>
+
+        <p>Biotechnology companies, such as Nucleus Genomics, have publicly claimed that they are enabling IVF couples to make informed choices about their future children. Prospective parents could compare embryos based on genetic markers, predicting disease risks for type 2 diabetes, Alzheimer's disease, and hypertension, as well as traits such as eye and hair color, height, and intelligence quotient (IQ).</p>
+
+        <p>Although clinicians associated with these technologies have acted in accordance with professional oaths of service and bioethical principles, the AI developers who have designed and deployed these algorithms have not been held to a comparable ethical framework.</p>
+
+        <figure class="case-figure">
+            <img src="nucleus-dashboard.png" alt="The Nucleus Embryo dashboard showing four embryos compared across Type 2 diabetes, Alzheimer's, eye color, hair color, height, hypertension, and IQ percentage points.">
+            <figcaption>The Nucleus Embryo dashboard offers IVF parents the opportunity to compare over 20 embryos and hundreds of genetic indicators to decide which embryo to implant. <em>Source: Nucleus Genomics.</em></figcaption>
+        </figure>
+    </div>
+
+    <!-- 2. The NYC Subway Campaign -->
+    <div class="case-block reveal">
+        <h3 class="case-block-heading">The NYC subway campaign</h3>
+
+        <p>Over the past few months, the biotechnology company Nucleus Genomics has begun to roll out a public ad campaign across New York City subway stations.</p>
+
+        <p>With tag lines like "have your best baby" and "these babies have great genes," this Silicon Valley-based startup is promoting what many are calling designer babies. The campaign has drawn significant attention from the public since Nucleus Genomics claims to be able to predict disease risks for type 2 diabetes, Alzheimer's, and hypertension, and traits such as eye/hair color, height, and IQ.</p>
+
+        <figure class="case-figure">
+            <img src="nucleus-subway-ad.jpg" alt="A Nucleus IVF+ advertisement in a New York City subway station with the tagline 'Have a healthier baby' featuring images of two babies.">
+            <figcaption>Nucleus IVF+ advertising in a New York City subway station, 2025. <em>Source: Nucleus Genomics.</em></figcaption>
+        </figure>
+
+        <p>According to Nucleus Genomics, their mission is to bring genetics into modern family planning and enable parents to have more details on their IVF embryos. While supporters argue that better genetic insights will allow families to avoid certain illnesses, critics say that these ads make children look like products and bring concerns about eugenics and inequality back into the spotlight.</p>
+
+        <figure class="case-figure">
+            <img src="nucleus-iq-ad.jpg" alt="A Nucleus IVF+ advertisement reading 'IQ is 50% genetic' featuring images of three babies.">
+            <figcaption>A Nucleus IVF+ campaign claiming a statistical relationship between genetics and IQ. <em>Source: Nucleus Genomics.</em></figcaption>
+        </figure>
+
+        <p>This perspective directly underscores the roles of developers and founders in the public perception of PGT tools.</p>
+    </div>
+
+    <!-- 3. Where the science stands -->
+    <div class="case-block reveal">
+        <h3 class="case-block-heading">Where the science stands</h3>
+
+        <p>The literature on polygenic embryo screening converges on several critical points:</p>
+
+        <ul class="case-bullets">
+            <li><span>Preimplantation genetic testing (PGT) has pivoted from its original purpose of avoiding serious monogenic diseases to now include probabilistic trait selection.<sup><a href="#cite-capalbo-2025">2</a></sup></span></li>
+            <li><span>The newer criterion of genomic metrics and risk profiles has no significant predictive value.<sup><a href="#cite-capalbo-2025">2</a></sup></span></li>
+            <li><span>This uncertainty is especially dangerous in the commercialization of these PGT technologies, as developers and companies rebrand this weak predictive genomic data into targeted marketing.<sup><a href="#cite-capalbo-2025">2</a></sup></span></li>
+            <li><span>AI tools have not been sufficiently validated and are clinically unproven; there is an evident gap between the technological applications of AI-enabled embryo selection models and their practical clinical utility.<sup><a href="#cite-cohen-2025">3</a></sup></span></li>
+            <li><span>There is high uncertainty of polygenic risk scoring and an inherent systemic bias in the AI algorithms, as their data focuses on European ancestry cohorts.<sup><a href="#cite-karavani-2019">4</a></sup></span></li>
+            <li><span>Despite identical architectures and training parameters, replicate AI models for embryo selection produce varying embryo rankings — there are significant risks of model volatility and prediction drift that are understated in embryo assessment technologies.<sup><a href="#cite-thirumalaraju-2025">5</a></sup></span></li>
+            <li><span>Current PRS-based embryo selection systems have limited predictive accuracy and risk misleading prospective parents.<sup><a href="#cite-haining-2025">6</a></sup></span></li>
+        </ul>
+
+        <figure class="case-figure">
+            <img src="lab-microscope.jpg" alt="A scientist working at a microscope in a fertility laboratory.">
+            <figcaption>An IVF laboratory. The science of polygenic embryo screening operates inside facilities certified under CLIA, but the algorithms producing the rankings are not subject to comparable pre-market review.</figcaption>
+        </figure>
+    </div>
+
+    <!-- 4. The regulatory gap -->
+    <div class="case-block reveal">
+        <h3 class="case-block-heading">The regulatory gap: CLIA, not FDA</h3>
+
+        <p>A central reason these systems can reach the public so quickly is the regulatory framework under which they operate. The following points are drawn from peer-reviewed literature and U.S. government sources:</p>
+
+        <ul class="case-bullets">
+            <li><span>PGT-based embryo screening operates as a Laboratory Developed Test (LDT) — a category that historically has not required FDA pre-market review.<sup><a href="#cite-nhgri">7</a></sup><sup><a href="#cite-fda-ldt">8</a></sup></span></li>
+            <li><span>CLIA certification governs laboratory operations — accuracy, quality control, and personnel — but does not examine whether the tests performed are clinically valid.<sup><a href="#cite-nhgri">7</a></sup></span></li>
+            <li><span>Since the 1990s, expert panels and members of Congress have raised concerns about this regulatory gap and the need for FDA to address it.<sup><a href="#cite-nhgri">7</a></sup></span></li>
+            <li><span>In May 2024, the FDA issued a final rule that would have brought LDTs under medical device regulation, with phased pre-market review requirements.<sup><a href="#cite-fda-ldt">8</a></sup></span></li>
+            <li><span>On March 31, 2025, the U.S. District Court for the Eastern District of Texas vacated that final rule, holding that the FDA lacks statutory authority under the Federal Food, Drug, and Cosmetic Act to regulate LDTs as medical devices.<sup><a href="#cite-crs">9</a></sup></span></li>
+            <li><span>The VALID Act — the Verifying Accurate Leading-edge IVCT Development Act — was Congress's prior attempt to create a legal framework for LDT oversight. It failed to pass in the 117th and 118th Congresses.<sup><a href="#cite-crs">9</a></sup></span></li>
+            <li><span>Current FDA and ISO standards cannot keep pace with the constantly evolving algorithms, cybersecurity risks, and systemic disparities in reproductive medicine.<sup><a href="#cite-curchoe-2023">10</a></sup></span></li>
+        </ul>
+
+        <div class="case-comparison">
+            <div class="case-comparison-card does">
+                <h5>What CLIA Covers</h5>
+                <ul>
+                    <li>Laboratory accuracy and reliability</li>
+                    <li>Personnel qualifications</li>
+                    <li>Quality control processes</li>
+                    <li>Analytical validity of the test</li>
+                </ul>
+            </div>
+            <div class="case-comparison-card does-not">
+                <h5>What CLIA Does NOT Cover</h5>
+                <ul>
+                    <li>Clinical validity of the underlying algorithm</li>
+                    <li>Predictive accuracy across populations</li>
+                    <li>Pre-market efficacy review</li>
+                    <li>Disclosure of model limitations</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. Core ethical concerns -->
+    <div class="case-block reveal">
+        <h3 class="case-block-heading">Core ethical concerns</h3>
+
+        <p>Drawing on the peer-reviewed literature reviewed for this Capstone, several ethical concerns recur across this domain:</p>
+
+        <ul class="case-bullets">
+            <li><span><strong>Overclaiming and the probabilistic-versus-deterministic gap.</strong> When the literature steers attention away from the probabilistic nature of the genomic data and toward ambiguous risk scores, developers and companies actively transform uncertainty into clinical authority.<sup><a href="#cite-capalbo-2025">2</a></sup></span></li>
+            <li><span><strong>Limited predictive validity.</strong> Even the most sophisticated models have not overcome the foundational limits of current embryo-viability markers, and the first randomized controlled trial for AI-enabled embryo selection displayed no significant improvement in pregnancy rates when compared to embryologists.<sup><a href="#cite-cohen-2025">3</a></sup><sup><a href="#cite-aufieri-2025">11</a></sup></span></li>
+            <li><span><strong>Commercial conflicts of interest.</strong> Between commercial interests and developer biases, it is evident that the creators of these reproductive technologies heavily influence these tools long before they reach the clinic.<sup><a href="#cite-koplin-2025">12</a></sup></span></li>
+            <li><span><strong>Equity and ancestry bias.</strong> There is high uncertainty of polygenic risk scoring and an inherent systemic bias in the AI algorithms, as their data focuses on European ancestry cohorts.<sup><a href="#cite-karavani-2019">4</a></sup><sup><a href="#cite-haining-2025">6</a></sup></span></li>
+            <li><span><strong>Developer accountability gap.</strong> AI developers often feel ethically powerless post-launch, even though they had full autonomy while creating the systems.<sup><a href="#cite-griffin-2024">13</a></sup></span></li>
+            <li><span><strong>The cautionary precedent.</strong> Without strong professional norms and guidelines, developers and clinicians may overclaim benefits and minimize uncertainty — as seen previously in the unproven stem-cell tourism market.<sup><a href="#cite-munsie-2014">14</a></sup></span></li>
+        </ul>
+
+        <div class="case-pullquote">
+            Rather than being "optimal" engineering goals, transparency and interpretability turn into ethical duties.
+            <cite>— from this Capstone's literature synthesis</cite>
+        </div>
+    </div>
+
+    <!-- 6. Why a code is necessary -->
+    <div class="case-block reveal">
+        <h3 class="case-block-heading">Why a Code is necessary</h3>
+
+        <p>To ensure that AI-enabled innovations in IVF and PGT are deployed ethically and safely, AI developers must subscribe to fiduciary standards of patient welfare, scientific integrity, and social responsibility. These professional ethical standards for developers are not merely aspirational but necessary for safeguarding patients, future children, and public trust.</p>
+
+        <p>Questions including "who is to be held accountable?" and "what is the role of AI developers?" make this project feel less abstract and more human. As clinical AI continues to expand, there will be more guardrails that need to be quickly established to ensure that new moral consequences are not introduced.</p>
+
+        <div class="case-pullquote">
+            Bioethics is more than just physician and patient interactions.
+            <cite>— from this Capstone's literature synthesis</cite>
+        </div>
+    </div>
+
+    <!-- CTA back to Code -->
+    <div class="case-cta reveal">
+        <h3>Read the Code of Ethics</h3>
+        <p>This essay accompanies the Code of Professional Ethics for AI Developers in Reproductive Embryo Selection Systems, which translates these concerns into operational, enforceable obligations.</p>
+        <a href="index.html" class="case-cta-btn">View the Code of Ethics →</a>
+    </div>
+
+    <!-- References -->
+    <div class="case-references reveal">
+        <div class="case-references-heading">References</div>
+        <ol>
+            <li id="cite-capalbo-2024">Capalbo, A., de Wert, G., Mertes, H., Klausner, L., Coonen, E., Spinella, F., Van de Velde, H., Viville, S., Sermon, K., Vermeulen, N., Lencz, T., &amp; Carmi, S. (2024). Screening embryos for polygenic disease risk: a review of epidemiological, clinical, and ethical considerations. <em>Human Reproduction Update, 30</em>(5), 529–557.</li>
+            <li id="cite-capalbo-2025">Capalbo, A., &amp; Wells, D. (2025). The evolution of preimplantation genetic testing: Where is the limit? <em>Reproductive Biomedicine Online, 50</em>(4), 104845.</li>
+            <li id="cite-cohen-2025">Cohen, J., Silvestri, G., Paredes, O., Martin-Alcala, H. E., Chavez-Badiola, A., Alikani, M., &amp; Palmer, G. A. (2025). Artificial intelligence in assisted reproductive technology: separating the dream from reality. <em>Reproductive Biomedicine Online, 50</em>(4), 104855.</li>
+            <li id="cite-karavani-2019">Karavani, E., Zuk, O., Zeevi, D., Barzilai, N., Stefanis, N. C., Hatzimanolis, A., Smyrnis, N., Avramopoulos, D., Kruglyak, L., Atzmon, G., Lam, M., Lencz, T., &amp; Carmi, S. (2019). Screening Human Embryos for Polygenic Traits Has Limited Utility. <em>Cell, 179</em>(6), 1424–1435.</li>
+            <li id="cite-thirumalaraju-2025">Thirumalaraju, P., Kanakasabapathy, M. K., Kandula, H., Kandula, T., Katkuri, A. V. R., Cipriano, C., Malmsten, J. E., Zaninovic, N., Bormann, C. L., &amp; Shafiee, H. (2025). Stability and reliability of artificial intelligence models in embryo selection for in vitro fertilization. <em>Fertility and Sterility</em>. Advance online publication.</li>
+            <li id="cite-haining-2025">Haining, C. M., Savulescu, J., Keogh, L., &amp; Schaefer, G. O. (2025). Polygenic risk scores and embryonic screening: considerations for regulation. <em>Journal of Medical Ethics, 51</em>(10), 719–728.</li>
+            <li id="cite-nhgri">National Human Genome Research Institute (NIH). <em>Regulation of Genetic Tests.</em> genome.gov/about-genomics/policy-issues/Regulation-of-Genetic-Tests.</li>
+            <li id="cite-fda-ldt">U.S. Food and Drug Administration. <em>Laboratory Developed Tests.</em> fda.gov/medical-devices/in-vitro-diagnostics/laboratory-developed-tests.</li>
+            <li id="cite-crs">Congressional Research Service. (2025). <em>District Court Rules FDA Lacks Authority to Regulate Laboratory Developed Tests.</em> Legal Sidebar LSB11312.</li>
+            <li id="cite-curchoe-2023">Curchoe, C. L. (2023). Unlock the algorithms: Regulation of adaptive algorithms in reproduction. <em>Fertility and Sterility, 120</em>(1), 38–43.</li>
+            <li id="cite-aufieri-2025">Aufieri, R., &amp; Mastrocola, F. (2025). Balancing Technology, Ethics, and Society: A Review of Artificial Intelligence in Embryo Selection. <em>Information, 16</em>(1), 18.</li>
+            <li id="cite-koplin-2025">Koplin, J. J., Johnston, M., Webb, A. N. S., Whittaker, A., &amp; Mills, C. (2025). Ethics of artificial intelligence in embryo assessment: Mapping the terrain. <em>Human Reproduction, 40</em>(2), 179–185.</li>
+            <li id="cite-griffin-2024">Griffin, T. A., Green, B. P., &amp; Welie, J. V. M. (2024). The ethical agency of AI developers. <em>AI and Ethics, 4</em>, 179–188.</li>
+            <li id="cite-munsie-2014">Munsie, M., &amp; Hyun, I. (2014). A question of ethics: Selling autologous stem cell therapies flaunts professional standards. <em>Stem Cell Research, 13</em>(3), 647–653.</li>
+        </ol>
+    </div>
+
+</div>
+
+<footer>
+    <div class="footer-inner">
+        Companion essay to the <a href="index.html">Code of Professional Ethics for AI Developers in Reproductive Embryo Selection Systems</a> — A Bioethics Capstone Project · Harvard Medical School Center for Bioethics · Mentored by Dr. Insoo Hyun, The Hastings Center · 2026.
+    </div>
+    <div class="footer-small">© 2026 Rohan Dasari · Harvard Medical School Center for Bioethics</div>
+</footer>
+
+<script>
+// Scroll progress
+const progress = document.getElementById('scrollProgress');
+function updateProgress() {
+    const scrolled = window.scrollY;
+    const height = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.width = ((scrolled / height) * 100) + '%';
+}
+window.addEventListener('scroll', updateProgress, { passive: true });
+updateProgress();
+
+// Reveal
+const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+            io.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// Theme toggle - shared with main site via localStorage
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon = document.getElementById('themeIcon');
+const themeLabel = document.getElementById('themeLabel');
+const html = document.documentElement;
+
+const sunPath = '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>';
+const moonPath = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+
+function applyTheme(t) {
+    html.setAttribute('data-theme', t);
+    themeIcon.innerHTML = t === 'dark' ? sunPath : moonPath;
+    themeLabel.textContent = t === 'dark' ? 'Light' : 'Dark';
+}
+
+try {
+    applyTheme(localStorage.getItem('theme-pref') || 'light');
+} catch(e) { applyTheme('light'); }
+
+themeToggle.addEventListener('click', () => {
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    applyTheme(next);
+    try { localStorage.setItem('theme-pref', next); } catch(e) {}
+});
+</script>
+
+</body>
+</html>
