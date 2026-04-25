@@ -711,97 +711,121 @@ section:last-of-type { border-bottom: none; }
 .commitment-statement strong { color: var(--teal-800); font-weight: 600; }
 
 /* ── Lifecycle ── */
-.lifecycle-wrap {
-    display: grid;
-    grid-template-columns: 220px 1fr;
-    gap: 2px;
-    border: 1px solid var(--gray-200);
+.lifecycle-list { display: flex; flex-direction: column; gap: 8px; }
+
+.lifecycle-item {
     border-radius: 12px;
     overflow: hidden;
-    background: var(--gray-200);
-}
-
-.lifecycle-phases {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    background: var(--paper-alt);
-}
-
-.phase-btn {
     background: var(--surface);
-    border: none;
-    padding: 20px 18px;
-    cursor: pointer;
-    text-align: left;
-    transition: background 0.15s;
+    border: 1px solid var(--gray-200);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.lifecycle-item[open] {
+    border-color: var(--teal-400);
+    box-shadow: var(--shadow-md);
+}
+
+.lifecycle-header {
     display: flex;
-    flex-direction: column;
-    gap: 4px;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 22px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+    transition: background 0.15s;
 }
-.phase-btn:hover { background: var(--gray-100); }
-.phase-btn.active { background: var(--teal-50); border-left: 2px solid var(--teal-600); }
+.lifecycle-header::-webkit-details-marker { display: none; }
+.lifecycle-header:hover { background: var(--gray-100); }
+[open] .lifecycle-header { background: var(--teal-50); }
 
-.phase-btn-num {
-    font-family: var(--mono);
-    font-size: 9px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--gray-400);
-}
-.phase-btn.active .phase-btn-num { color: var(--teal-600); }
-
-.phase-btn-title {
-    font-size: 13px;
+.lifecycle-phase-letter {
+    width: 34px; height: 34px;
+    border-radius: 8px;
+    background: var(--teal-100);
+    color: var(--teal-800);
+    font-family: var(--serif);
+    font-size: 1.1rem;
     font-weight: 500;
-    color: var(--gray-700);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+}
+[open] .lifecycle-header .lifecycle-phase-letter {
+    background: var(--teal-800);
+    color: #fff;
+}
+
+.lifecycle-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    flex: 1;
     line-height: 1.3;
 }
-.phase-btn.active .phase-btn-title { color: var(--teal-800); }
+[open] .lifecycle-title { color: var(--teal-900); }
+[data-theme="dark"] .lifecycle-item[open] .lifecycle-title { color: var(--teal-400); }
 
-.lifecycle-content {
-    background: var(--surface);
-    padding: 32px;
+.lifecycle-toggle {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    border: 1.5px solid var(--gray-300);
+    flex-shrink: 0;
     position: relative;
+    transition: border-color 0.2s, background 0.2s;
+}
+.lifecycle-toggle::before,
+.lifecycle-toggle::after {
+    content: '';
+    position: absolute;
+    background: var(--gray-500);
+    border-radius: 1px;
+    transition: transform 0.25s var(--ease), opacity 0.25s;
+}
+.lifecycle-toggle::before { width: 8px; height: 1.5px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+.lifecycle-toggle::after  { width: 1.5px; height: 8px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+[open] .lifecycle-toggle { border-color: var(--teal-600); background: var(--teal-600); }
+[open] .lifecycle-toggle::before { background: #fff; }
+[open] .lifecycle-toggle::after  { background: #fff; transform: translate(-50%, -50%) rotate(90deg); opacity: 0; }
+
+.lifecycle-body {
+    padding: 20px 24px 24px 24px;
+    border-top: 1px solid var(--teal-100);
 }
 
-.phase-panel { display: none; }
-.phase-panel.active { display: block; }
-
-.phase-panel-header { margin-bottom: 24px; }
-
-.phase-panel-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--teal-600);
-    margin-bottom: 6px;
-}
-
-.phase-panel-title {
-    font-family: var(--serif);
-    font-size: 1.2rem;
-    font-weight: 400;
-    color: var(--ink);
-    letter-spacing: -0.015em;
-}
-
-.phase-obligations { display: flex; flex-direction: column; gap: 12px; }
-
-.obligation {
-    display: flex;
-    gap: 12px;
-    font-size: 0.9rem;
-    line-height: 1.68;
+.lifecycle-body p {
+    font-size: 0.925rem;
+    line-height: 1.78;
     color: var(--ink-soft);
-    padding: 12px 16px;
-    background: var(--gray-100);
-    border-radius: 8px;
-    border-left: 2px solid transparent;
+    margin-bottom: 14px;
+    max-width: 68ch;
 }
-.obligation:hover { border-left-color: var(--teal-400); background: var(--teal-50); }
-.obligation strong { color: var(--ink); }
+.lifecycle-body p:last-child { margin-bottom: 0; }
+
+.lifecycle-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 14px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-width: 68ch;
+}
+.lifecycle-bullets li {
+    display: flex;
+    gap: 10px;
+    font-size: 0.925rem;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    padding-left: 4px;
+}
+.lifecycle-bullets li::before {
+    content: '';
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--teal-400);
+    flex-shrink: 0;
+    margin-top: 9px;
+}
 
 /* ── Prohibited ── */
 .prohibited-grid {
@@ -1097,9 +1121,6 @@ footer {
     .mobile-nav-trigger { display: flex; }
     .mobile-nav-panel { display: block; }
     .about-grid { grid-template-columns: 1fr; gap: 28px; }
-    .lifecycle-wrap { grid-template-columns: 1fr; }
-    .lifecycle-phases { flex-direction: row; overflow-x: auto; }
-    .phase-btn { min-width: 140px; }
     .footer-inner { grid-template-columns: 1fr; gap: 32px; }
 }
 
@@ -1170,10 +1191,10 @@ footer {
             <li><a href="#lifecycle" class="nav-link">Lifecycle Obligations</a></li>
             <li><a href="#prohibited" class="nav-link">Prohibited Practices</a></li>
             <li><a href="#accountability" class="nav-link">Accountability</a></li>
+            <li><a href="#feedback" class="nav-link feedback-nav">Stakeholder Feedback ↗</a></li>
             <li><a href="#appendix" class="nav-link">Appendix</a></li>
             <li><a href="#references" class="nav-link">References</a></li>
             <li><a href="#about" class="nav-link">About</a></li>
-            <li><a href="#feedback" class="nav-link feedback-nav">Stakeholder Feedback ↗</a></li>
         </ol>
     </aside>
 
@@ -1245,7 +1266,7 @@ footer {
                     </div>
                 </div>
 
-                <p class="scope-note">This Code addresses these two categories, and it is pivotal that systems prioritize the risk of serious genetic disease or medical trait selection over those developed for non-medical, social, or aesthetic trait optimization. The inclusion of social traits is not categorically prohibited, but any such traits shall be explicitly identified, justified, and constrained, and shall not supersede or obscure medically relevant considerations.</p>
+                <p class="scope-note">This Code addresses these two categories, and it is pivotal that systems prioritize the risk of serious genetic disease or medical trait selection over those developed for non-medical, social, or aesthetic trait optimization. The inclusion of social traits is not categorically prohibited, but any such traits <strong>shall</strong> be explicitly identified, justified, and constrained, and <strong>shall not</strong> supersede or obscure medically relevant considerations.</p>
 
                 <p style="margin-top: 20px;">This framework was derived from the American Board of Internal Medicine (ABIM) Physician Charter and existing reproductive ethics literature. To ensure that AI-enabled innovations in IVF and PGT are deployed ethically and safely, AI developers must subscribe to fiduciary standards of patient welfare, scientific integrity, and social responsibility.</p>
             </div>
@@ -1272,7 +1293,7 @@ footer {
                         <div class="commitment-toggle"></div>
                     </summary>
                     <div class="commitment-body-content">
-                        <p class="commitment-statement">Developers <strong>shall</strong> place the welfare of patients and future children above all competing interests. No commercial or organizational pressure may override the developer's responsibility to avoid foreseeable harm for prospective parents and future children. While designing embryo-selection systems, developers shall prioritize patient safety and clinical utility over predictive scope and model complexity.</p>
+                        <p class="commitment-statement">Developers <strong>shall</strong> place the welfare of patients and future children above all competing interests. No commercial or organizational pressure may override the developer's responsibility to avoid foreseeable harm for prospective parents and future children. While designing embryo-selection systems, developers <strong>shall</strong> prioritize patient safety and clinical utility over predictive scope and model complexity.</p>
                     </div>
                 </details>
 
@@ -1287,7 +1308,7 @@ footer {
                         <div class="commitment-toggle"></div>
                     </summary>
                     <div class="commitment-body-content">
-                        <p class="commitment-statement">Developers <strong>shall</strong> present all polygenic risk scores and embryo rankings as probabilistic estimates, not deterministic predictions. No embryo risk score shall be provided to clinical partners without accompanying documentation of its predictive limitations. All system outputs provided to clinical partners shall be accompanied by confidence intervals, predictive validity across populations, and relevant reproductive outcome benchmarks, where available. In instances where proprietary data constraints limit disclosure, developers shall clearly identify what information has been withheld and why.</p>
+                        <p class="commitment-statement">Developers <strong>shall</strong> present all polygenic risk scores and embryo rankings as probabilistic estimates, not deterministic predictions. No embryo risk score <strong>shall</strong> be provided to clinical partners without accompanying documentation of its predictive limitations. All system outputs provided to clinical partners <strong>shall</strong> be accompanied by confidence intervals, predictive validity across populations, and relevant reproductive outcome benchmarks, where available. In instances where proprietary data constraints limit disclosure, developers <strong>shall</strong> clearly identify what information has been withheld and why.</p>
                     </div>
                 </details>
 
@@ -1301,7 +1322,7 @@ footer {
                         <div class="commitment-toggle"></div>
                     </summary>
                     <div class="commitment-body-content">
-                        <p class="commitment-statement">Although obtaining informed consent is the duty of the clinician, developers <strong>shall</strong> be responsible for ensuring that the materials and systems they provide make accurate counseling possible. Developers shall design systems and produce materials that enable genetic counselors and other designated professionals to accurately interpret and communicate AI-generated outputs. At minimum, developers shall provide: counselor-facing training materials explaining model logic, confidence levels, and known limitations; and patient-facing documentation clarifying when AI systems are applied and what each output represents.</p>
+                        <p class="commitment-statement">Although obtaining informed consent is the duty of the clinician, developers <strong>shall</strong> be responsible for ensuring that the materials and systems they provide make accurate counseling possible. Developers <strong>shall</strong> design systems and produce materials that enable genetic counselors and other designated professionals to accurately interpret and communicate AI-generated outputs. At minimum, developers <strong>shall</strong> provide: counselor-facing training materials explaining model logic, confidence levels, and known limitations; and patient-facing documentation clarifying when AI systems are applied and what each output represents.</p>
                     </div>
                 </details>
 
@@ -1315,7 +1336,7 @@ footer {
                         <div class="commitment-toggle"></div>
                     </summary>
                     <div class="commitment-body-content">
-                        <p class="commitment-statement">Developers <strong>shall</strong> assess and document how their systems perform across patient populations, with particular attention to ancestry-related disparities in predictive validity. Any system that demonstrates materially unequal predictive performance across populations shall not be deployed unless such disparities are disclosed and deemed acceptable within the clinical context. To mitigate health inequities, developers shall evaluate pricing structures, clinic partnerships, and eligibility criteria.</p>
+                        <p class="commitment-statement">Developers <strong>shall</strong> assess and document how their systems perform across patient populations, with particular attention to ancestry-related disparities in predictive validity. Any system that demonstrates materially unequal predictive performance across populations <strong>shall not</strong> be deployed unless such disparities are disclosed and deemed acceptable within the clinical context. To mitigate health inequities, developers <strong>shall</strong> evaluate pricing structures, clinic partnerships, and eligibility criteria.</p>
                     </div>
                 </details>
 
@@ -1330,7 +1351,7 @@ footer {
                         <div class="commitment-toggle"></div>
                     </summary>
                     <div class="commitment-body-content">
-                        <p class="commitment-statement">Developers <strong>shall</strong> ground their work in peer-reviewed methodologies and established engineering practices. All systems shall undergo pre-deployment technical validation, including benchmarking against clinical comparators, evaluating performance across populations, and assessing model stability. Developers shall clearly communicate the probabilistic nature of all outputs and the limits of available evidence, including where clinical utility has not been established. Although the collection and interpretation of long-term clinical outcomes remain within the clinical domain, developers shall design systems that support integration with such data for ongoing evaluation. Where new evidence materially affects the model's performance or interpretation, developers shall update, recalibrate, or suspend future deployment of the system, as appropriate.</p>
+                        <p class="commitment-statement">Developers <strong>shall</strong> ground their work in peer-reviewed methodologies and established engineering practices. All systems <strong>shall</strong> undergo pre-deployment technical validation, including benchmarking against clinical comparators, evaluating performance across populations, and assessing model stability. Developers <strong>shall</strong> clearly communicate the probabilistic nature of all outputs and the limits of available evidence, including where clinical utility has not been established. Although the collection and interpretation of long-term clinical outcomes remain within the clinical domain, developers <strong>shall</strong> design systems that support integration with such data for ongoing evaluation. Where new evidence materially affects the model's performance or interpretation, developers <strong>shall</strong> update, recalibrate, or suspend future deployment of the system, as appropriate.</p>
                     </div>
                 </details>
 
@@ -1345,7 +1366,7 @@ footer {
                         <div class="commitment-toggle"></div>
                     </summary>
                     <div class="commitment-body-content">
-                        <p class="commitment-statement">Developers <strong>shall</strong> proactively identify potential conflicts of interest between themselves and employers, clinic partners, or other parties that could compromise embryo-ranking criteria or system design. Developers shall ensure that identified conflicts do not bias the design, validation, or deployment of AI systems. Commercial relationships shall be documented and disclosed to clinical partners prior to deployment.</p>
+                        <p class="commitment-statement">Developers <strong>shall</strong> proactively identify potential conflicts of interest between themselves and employers, clinic partners, or other parties that could compromise embryo-ranking criteria or system design. Developers <strong>shall</strong> ensure that identified conflicts do not bias the design, validation, or deployment of AI systems. Commercial relationships <strong>shall</strong> be documented and disclosed to clinical partners prior to deployment.</p>
                     </div>
                 </details>
 
@@ -1360,79 +1381,76 @@ footer {
                 <p class="section-intro">The six commitments are translated into concrete obligations mapped to each stage of the AI development pipeline. Select a phase to see the corresponding obligations.</p>
             </div>
 
-            <div class="lifecycle-wrap reveal">
-                <div class="lifecycle-phases" role="tablist" aria-label="Development lifecycle phases">
-                    <button class="phase-btn active" data-phase="1" role="tab" aria-selected="true">
-                        <span class="phase-btn-num">Phase 01</span>
-                        <span class="phase-btn-title">Data &amp; Model Design</span>
-                    </button>
-                    <button class="phase-btn" data-phase="2" role="tab" aria-selected="false">
-                        <span class="phase-btn-num">Phase 02</span>
-                        <span class="phase-btn-title">Validation &amp; Testing</span>
-                    </button>
-                    <button class="phase-btn" data-phase="3" role="tab" aria-selected="false">
-                        <span class="phase-btn-num">Phase 03</span>
-                        <span class="phase-btn-title">Deployment &amp; Use</span>
-                    </button>
-                    <button class="phase-btn" data-phase="4" role="tab" aria-selected="false">
-                        <span class="phase-btn-num">Phase 04</span>
-                        <span class="phase-btn-title">Monitoring &amp; Maintenance</span>
-                    </button>
-                </div>
+            <div class="lifecycle-list reveal">
 
-                <div class="lifecycle-content">
-                    <div class="phase-panel active" data-phase="1">
-                        <div class="phase-panel-header">
-                            <div class="phase-panel-label">Phase 01 · Data &amp; Model Design</div>
-                            <div class="phase-panel-title">Ground the system in representative data.</div>
-                        </div>
-                        <div class="phase-obligations">
-                            <div class="obligation"><span><strong>Use representative datasets.</strong> Developers shall build training datasets that are representative across patient populations and evaluated for ethical consequences, including biases or inequities.</span></div>
-                            <div class="obligation"><span><strong>Document ancestry and provenance.</strong> Dataset composition, including ancestry distribution and clinic source, must be internally documented prior to model training.</span></div>
-                            <div class="obligation"><span><strong>Justify trait inclusion.</strong> Traits related to the prevention of serious genetic disease or clinically meaningful reproductive outcomes shall be prioritized. Where non-medical traits are included, developers shall clearly distinguish such traits from clinical indicators and provide written justification grounded in transparency and clinical context.</span></div>
-                            <div class="obligation"><span><strong>Build for interpretability.</strong> AI models shall be designed with interpretability as a core requirement, including confidence intervals and output explanations for clinical use.</span></div>
-                        </div>
+                <details class="lifecycle-item" open>
+                    <summary class="lifecycle-header">
+                        <div class="lifecycle-phase-letter">A</div>
+                        <span class="lifecycle-title">Data and Model Design</span>
+                        <div class="lifecycle-toggle"></div>
+                    </summary>
+                    <div class="lifecycle-body">
+                        <p>Developers <strong>shall</strong> build training datasets that are representative across patient populations and evaluated for ethical consequences (e.g., biases or inequities). Dataset composition, including ancestry distribution and clinic source, must be internally documented prior to model training.</p>
+                        <p>Trait inclusion <strong>shall</strong> be explicitly justified and documented. Traits related to the prevention of serious genetic disease or clinically meaningful reproductive outcomes <strong>shall</strong> be prioritized. Where non-medical traits are included, developers shall:</p>
+                        <ul class="lifecycle-bullets">
+                            <li>Clearly distinguish such traits from clinical indicators</li>
+                            <li>Provide written justification for their inclusion grounded in transparency and clinical context</li>
+                            <li>Ensure that non-medical traits do not supersede or obscure medically relevant information</li>
+                        </ul>
+                        <p>AI models <strong>shall</strong> be designed with interpretability as a core requirement, including confidence intervals and output explanations for clinical use.</p>
                     </div>
+                </details>
 
-                    <div class="phase-panel" data-phase="2">
-                        <div class="phase-panel-header">
-                            <div class="phase-panel-label">Phase 02 · Validation &amp; Testing</div>
-                            <div class="phase-panel-title">Validate against what developers can control.</div>
-                        </div>
-                        <div class="phase-obligations">
-                            <div class="obligation"><span><strong>Retrospective validation.</strong> Developers shall validate systems against retrospective datasets prior to release, benchmarking against prior embryologist decisions or established clinical comparators.</span></div>
-                            <div class="obligation"><span><strong>Bias audits and stability testing.</strong> Bias audits across relevant population subgroups and stability testing to assess output consistency under dataset shifts and retraining shall be performed and documented.</span></div>
-                            <div class="obligation"><span><strong>External validation.</strong> External validation across clinical sites and patient groups shall precede deployment. Iterative deployment does not exempt developers from meeting minimum performance and safety thresholds before clinical integration.</span></div>
-                            <div class="obligation"><span><strong>Clinical-outcome validation is shared.</strong> As developers lack the patient access required for long-term clinical outcome validation (e.g., live birth rate, implantation rate), clinical partners shall oversee such collection. Where authorized data-sharing agreements exist, developers shall support this evaluation.</span></div>
-                        </div>
+                <details class="lifecycle-item">
+                    <summary class="lifecycle-header">
+                        <div class="lifecycle-phase-letter">B</div>
+                        <span class="lifecycle-title">Validation and Testing</span>
+                        <div class="lifecycle-toggle"></div>
+                    </summary>
+                    <div class="lifecycle-body">
+                        <p>Validation <strong>shall</strong> follow a phased evaluation process modeled on the FDA's staged pre-market approval framework for medical devices, progressing from early feasibility studies through multi-site clinical testing to real-world effectiveness assessment.</p>
+                        <p>Developers <strong>shall</strong> be responsible for pre-deployment technical validation, including:</p>
+                        <ul class="lifecycle-bullets">
+                            <li>Benchmarking against prior embryologist decisions or established clinical comparators</li>
+                            <li>Bias audits across relevant population subgroups</li>
+                            <li>Stability testing to assess output consistency under dataset shifts and retraining</li>
+                        </ul>
+                        <p>If model outputs vary significantly across dataset shifts or retraining, deployment <strong>shall</strong> be deferred until stability is established. Iterative deployment does not exempt developers from meeting minimum performance and safety thresholds before clinical integration.</p>
+                        <p>As developers lack the patient access and longitudinal follow-up capacity required for long-term clinical outcome validation, clinical partners <strong>shall</strong> oversee the collection of specific performance metrics (e.g., live birth rate, implantation rate, miscarriage rate, trait-related outcomes). Where authorized data-sharing agreements exist, developers <strong>shall</strong> support clinical partners in conducting this evaluation.</p>
                     </div>
+                </details>
 
-                    <div class="phase-panel" data-phase="3">
-                        <div class="phase-panel-header">
-                            <div class="phase-panel-label">Phase 03 · Deployment &amp; Use</div>
-                            <div class="phase-panel-title">Equip clinicians to use the system responsibly.</div>
-                        </div>
-                        <div class="phase-obligations">
-                            <div class="obligation"><span><strong>Role-specific training.</strong> Developers shall require and document role-specific training for all end users — including clinicians, embryologists, and genetic counselors — prior to clinical deployment. Training shall address interpretation of uncertainty, contraindications, and common patterns of misuse.</span></div>
-                            <div class="obligation"><span><strong>Human oversight.</strong> Systems shall be deployed with an appropriate human oversight model. Because human review can either reduce or increase error depending on task complexity, developers shall evaluate empirically whether human-in-the-loop review improves outcomes for the intended use-case.</span></div>
-                            <div class="obligation"><span><strong>Regulatory clearance required.</strong> No AI model shall be deployed for clinical use without meeting applicable regulatory requirements and internal standards for safety, performance, and transparency.</span></div>
-                            <div class="obligation"><span><strong>Marketing restraint.</strong> Marketing and presentation must not overstate the model's predictive capabilities.</span></div>
-                        </div>
+                <details class="lifecycle-item">
+                    <summary class="lifecycle-header">
+                        <div class="lifecycle-phase-letter">C</div>
+                        <span class="lifecycle-title">Deployment and Use</span>
+                        <div class="lifecycle-toggle"></div>
+                    </summary>
+                    <div class="lifecycle-body">
+                        <p>Developers <strong>shall</strong> require and document role-specific training for all end users—including clinicians, embryologists, genetic counselors—prior to clinical deployment. Training <strong>shall</strong> address interpretation of uncertainty, contraindications, and common patterns of misuse.</p>
+                        <p>Deployment documentation <strong>shall</strong> clearly define:</p>
+                        <ul class="lifecycle-bullets">
+                            <li>The system's intended use cases</li>
+                            <li>Known limitations and contraindications</li>
+                            <li>Conditions under which the system should not be used</li>
+                        </ul>
+                        <p>Systems <strong>shall</strong> be deployed with an appropriate human oversight model. Because human review can either reduce or increase error depending on task complexity, developers <strong>shall</strong> evaluate empirically whether human-in-the-loop review improves outcomes for the intended use-case and <strong>shall</strong> implement oversight accordingly.</p>
+                        <p>No AI model <strong>shall</strong> be deployed for clinical use without meeting applicable regulatory requirements and internal standards for safety, performance, and transparency. Marketing and presentation must not overstate the model's predictive capabilities.</p>
                     </div>
+                </details>
 
-                    <div class="phase-panel" data-phase="4">
-                        <div class="phase-panel-header">
-                            <div class="phase-panel-label">Phase 04 · Monitoring &amp; Maintenance</div>
-                            <div class="phase-panel-title">Track technical performance; partner on clinical outcomes.</div>
-                        </div>
-                        <div class="phase-obligations">
-                            <div class="obligation"><span><strong>Performance drift monitoring.</strong> Developers shall implement tools and processes to monitor performance drift post-deployment. Usage log review protocols and monitoring responsibilities shall be established and documented before deploying these models.</span></div>
-                            <div class="obligation"><span><strong>Withdrawal thresholds.</strong> When minimum performance or equity thresholds are no longer met, developers shall notify clinical partners promptly and either recalibrate or suspend the system until thresholds are restored.</span></div>
-                            <div class="obligation"><span><strong>Timely communication of corrective actions.</strong> All corrective actions taken shall be communicated to clinical partners in a timely manner.</span></div>
-                            <div class="obligation"><span><strong>Clinical outcome monitoring is shared.</strong> Clinical outcome monitoring remains the responsibility of the deploying clinician; developers shall support this work where authorized data-sharing permits.</span></div>
-                        </div>
+                <details class="lifecycle-item">
+                    <summary class="lifecycle-header">
+                        <div class="lifecycle-phase-letter">D</div>
+                        <span class="lifecycle-title">Monitoring and Maintenance</span>
+                        <div class="lifecycle-toggle"></div>
+                    </summary>
+                    <div class="lifecycle-body">
+                        <p>Developers <strong>shall</strong> implement tools and processes to monitor performance drift post-deployment. Usage log review protocols and monitoring responsibilities <strong>shall</strong> be established and documented before deploying these models. Where developers retain access to post-deployment data, usage logs <strong>shall</strong> be reviewed on a regular and pre-specified schedule for evidence of discriminatory effects or unintended clinical consequences.</p>
+                        <p>When minimum performance or equity thresholds are no longer met, developers <strong>shall</strong> notify clinical partners promptly and either recalibrate or suspend the system until thresholds are restored. All corrective actions taken <strong>shall</strong> be communicated to clinical partners in a timely manner.</p>
                     </div>
-                </div>
+                </details>
+
             </div>
         </section>
 
@@ -1448,32 +1466,37 @@ footer {
                 <div class="prohibited-item">
                     <div class="prohibited-label">Prohibition · 01</div>
                     <h3 class="prohibited-title">Social trait prioritization</h3>
-                    <p class="prohibited-text">Developers shall not design embryo-ranking systems in which social or non-medical traits are prioritized over the prevention of serious genetic disease or clinically meaningful reproductive outcomes.</p>
+                    <p class="prohibited-text">Developers <strong>shall not</strong> design embryo-ranking systems in which social or non-medical traits are prioritized over the prevention of serious genetic disease or clinically meaningful reproductive outcomes.</p>
                 </div>
                 <div class="prohibited-item">
                     <div class="prohibited-label">Prohibition · 02</div>
                     <h3 class="prohibited-title">Deployment without validated benchmarks</h3>
-                    <p class="prohibited-text">Developers shall not market or clinically integrate embryo-selection systems without documented validation criteria and pre-specified performance benchmarks.</p>
+                    <p class="prohibited-text">Developers <strong>shall not</strong> market or clinically integrate embryo-selection systems without documented validation criteria and pre-specified performance benchmarks.</p>
                 </div>
                 <div class="prohibited-item">
                     <div class="prohibited-label">Prohibition · 03</div>
                     <h3 class="prohibited-title">Deterministic claims about probabilistic outputs</h3>
-                    <p class="prohibited-text">Developers shall not represent probabilistic polygenic risk scores or embryo rankings as deterministic predictions or clinical guarantees.</p>
+                    <p class="prohibited-text">Developers <strong>shall not</strong> represent probabilistic polygenic risk scores or embryo rankings as deterministic predictions or clinical guarantees.</p>
                 </div>
                 <div class="prohibited-item">
                     <div class="prohibited-label">Prohibition · 04</div>
-                    <h3 class="prohibited-title">Concealment of known limitations</h3>
-                    <p class="prohibited-text">Developers shall not conceal known limitations in training data composition, population-specific predictive gaps, or evidence of model bias, significant performance degradation, or safety-relevant failures from clinical partners.</p>
+                    <h3 class="prohibited-title">Concealment of training data limitations</h3>
+                    <p class="prohibited-text">Developers <strong>shall not</strong> conceal known limitations in training data composition or population-specific predictive gaps from clinical partners.</p>
                 </div>
                 <div class="prohibited-item">
                     <div class="prohibited-label">Prohibition · 05</div>
-                    <h3 class="prohibited-title">"Research-only" labeling to evade oversight</h3>
-                    <p class="prohibited-text">Developers shall not label systems as "research only" while knowingly facilitating their use in clinical decision-making.</p>
+                    <h3 class="prohibited-title">Concealment of model bias or safety failures</h3>
+                    <p class="prohibited-text">Developers <strong>shall not</strong> conceal evidence of model bias, significant performance degradation, or safety-relevant system failures from clinical collaborators.</p>
                 </div>
                 <div class="prohibited-item">
                     <div class="prohibited-label">Prohibition · 06</div>
+                    <h3 class="prohibited-title">"Research-only" labeling to evade oversight</h3>
+                    <p class="prohibited-text">Developers <strong>shall not</strong> label systems as "research only" while knowingly facilitating their use in clinical decision-making.</p>
+                </div>
+                <div class="prohibited-item">
+                    <div class="prohibited-label">Prohibition · 07</div>
                     <h3 class="prohibited-title">Direct-to-patient marketing without physician mediation</h3>
-                    <p class="prohibited-text">Developers shall not independently market embryo-selection AI tools directly to patients without physician mediation and appropriate regulatory oversight.</p>
+                    <p class="prohibited-text">Developers <strong>shall not</strong> independently market embryo-selection AI tools directly to patients without physician mediation and appropriate regulatory oversight.</p>
                 </div>
             </div>
         </section>
@@ -1490,27 +1513,104 @@ footer {
                 <div class="accountability-item">
                     <div>
                         <h4>Comprehensive documentation</h4>
-                        <p>Developers shall maintain comprehensive documentation of model design decisions, training data composition, validation procedures, performance benchmarks, and update history. Documentation shall be sufficient to enable retrospective review of system behavior, including evaluation of model performance, limitations, and decision pathways.</p>
+                        <p>Developers <strong>shall</strong> maintain comprehensive documentation of model design decisions, training data composition, validation procedures, performance benchmarks, and update history. Documentation <strong>shall</strong> be sufficient to enable retrospective review of system behavior, including evaluation of model performance, limitations, and decision pathways.</p>
                     </div>
                 </div>
                 <div class="accountability-item">
                     <div>
                         <h4>Timely communication of material concerns</h4>
-                        <p>Developers shall communicate material system limitations and performance concerns to clinical collaborators in a timely manner. When a system's performance degrades below established thresholds, developers shall notify clinical partners before continued clinical use.</p>
+                        <p>Developers <strong>shall</strong> communicate material system limitations and performance concerns to clinical collaborators in a timely manner. When a system's performance degrades below established thresholds, developers <strong>shall</strong> notify clinical partners before continued clinical use.</p>
                     </div>
                 </div>
                 <div class="accountability-item">
                     <div>
                         <h4>Contractual boundaries of responsibility</h4>
-                        <p>Developers shall work with institutional and clinical partners to clearly define contractual boundaries of responsibility regarding system interpretation and clinical use. These boundaries shall be established prior to deployment and documented in a form accessible to all parties.</p>
+                        <p>Developers <strong>shall</strong> work with institutional and clinical partners to clearly define contractual boundaries of responsibility regarding system interpretation and clinical use. These boundaries <strong>shall</strong> be established prior to deployment and documented in a form accessible to all parties.</p>
                     </div>
                 </div>
                 <div class="accountability-item">
                     <div>
                         <h4>Interdisciplinary ethics review</h4>
-                        <p>Developers shall seek interdisciplinary input — including from reproductive specialists, genetic counselors, and bioethicists — when making decisions that expand trait scope, modify embryo-ranking criteria, or alter the clinical use conditions of deployed systems.</p>
+                        <p>Developers <strong>shall</strong> seek interdisciplinary input — including from reproductive specialists, genetic counselors, and bioethicists — when making decisions that expand trait scope, modify embryo-ranking criteria, or alter the clinical use conditions of deployed systems.</p>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- FEEDBACK -->
+        <section id="feedback">
+            <div class="section-header reveal">
+                <div class="section-number">Stakeholder Review</div>
+                <h2 class="section-title">Share <em>stakeholder feedback</em> on the Code.</h2>
+                <p class="section-intro">This Code is intended to serve as the basis for future stakeholder review. Feedback from clinicians, AI developers, bioethicists, genetic counselors, patients, and professional society representatives is welcomed and will inform subsequent revisions. This is not a customer service form — we are asking for substantive expert and community input on the content of the Code itself.</p>
+            </div>
+
+            <div class="form-wrap reveal">
+                <p class="form-intro">All submissions are reviewed; substantive contributions may be acknowledged in future revisions with your permission.</p>
+
+                <form action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="affiliation">Affiliation &amp; Role</label>
+                        <input type="text" id="affiliation" name="affiliation" placeholder="e.g., Embryologist, Massachusetts General Hospital" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="stakeholder-type">Stakeholder Category</label>
+                        <select id="stakeholder-type" name="stakeholder_type" required>
+                            <option value="">— Select —</option>
+                            <option>AI / ML Developer</option>
+                            <option>Clinician (REI / OB-GYN)</option>
+                            <option>Embryologist</option>
+                            <option>Genetic Counselor</option>
+                            <option>Bioethicist / Philosopher</option>
+                            <option>Legal / Policy Scholar</option>
+                            <option>Patient / Patient Advocate</option>
+                            <option>Professional Society Representative</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="section">Section addressed</label>
+                        <select id="section" name="section">
+                            <option value="">— Optional —</option>
+                            <option>Preamble</option>
+                            <option>Commitment I — Responsible System Design</option>
+                            <option>Commitment II — Transparent Risk Scores</option>
+                            <option>Commitment III — Informed Counseling</option>
+                            <option>Commitment IV — Equity in Prediction</option>
+                            <option>Commitment V — Scientific Integrity</option>
+                            <option>Commitment VI — Independence from Market Pressures</option>
+                            <option>Lifecycle Obligations</option>
+                            <option>Prohibited Practices</option>
+                            <option>Accountability &amp; Oversight</option>
+                            <option>General / Structural</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="comments">Feedback</label>
+                        <textarea id="comments" name="comments" placeholder="Substantive feedback, proposed revisions, or concerns. References welcome." required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="attribution">May your feedback be acknowledged?</label>
+                        <select id="attribution" name="attribution">
+                            <option>Yes — name and affiliation</option>
+                            <option>Yes — affiliation only</option>
+                            <option>No — anonymous</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        Submit Feedback
+                        <svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                    </button>
+                    <p class="form-note">Responses are emailed directly to the author. No data is stored on this site.</p>
+                </form>
             </div>
         </section>
 
@@ -1597,82 +1697,6 @@ footer {
         </section>
 
         <!-- FEEDBACK -->
-        <section id="feedback">
-            <div class="section-header reveal">
-                <div class="section-number">Stakeholder Review</div>
-                <h2 class="section-title">Share <em>stakeholder feedback</em> on the Code.</h2>
-                <p class="section-intro">This Code is intended to serve as the basis for future stakeholder review. Feedback from clinicians, AI developers, bioethicists, genetic counselors, patients, and professional society representatives is welcomed and will inform subsequent revisions. This is not a customer service form — we are asking for substantive expert and community input on the content of the Code itself.</p>
-            </div>
-
-            <div class="form-wrap reveal">
-                <p class="form-intro">All submissions are reviewed; substantive contributions may be acknowledged in future revisions with your permission.</p>
-
-                <form action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="affiliation">Affiliation &amp; Role</label>
-                        <input type="text" id="affiliation" name="affiliation" placeholder="e.g., Embryologist, Massachusetts General Hospital" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="stakeholder-type">Stakeholder Category</label>
-                        <select id="stakeholder-type" name="stakeholder_type" required>
-                            <option value="">— Select —</option>
-                            <option>AI / ML Developer</option>
-                            <option>Clinician (REI / OB-GYN)</option>
-                            <option>Embryologist</option>
-                            <option>Genetic Counselor</option>
-                            <option>Bioethicist / Philosopher</option>
-                            <option>Legal / Policy Scholar</option>
-                            <option>Patient / Patient Advocate</option>
-                            <option>Professional Society Representative</option>
-                            <option>Other</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="section">Section addressed</label>
-                        <select id="section" name="section">
-                            <option value="">— Optional —</option>
-                            <option>Preamble</option>
-                            <option>Commitment I — Responsible System Design</option>
-                            <option>Commitment II — Transparent Risk Scores</option>
-                            <option>Commitment III — Informed Counseling</option>
-                            <option>Commitment IV — Equity in Prediction</option>
-                            <option>Commitment V — Scientific Integrity</option>
-                            <option>Commitment VI — Independence from Market Pressures</option>
-                            <option>Lifecycle Obligations</option>
-                            <option>Prohibited Practices</option>
-                            <option>Accountability &amp; Oversight</option>
-                            <option>Illustrative Case Study</option>
-                            <option>General / Structural</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="comments">Feedback</label>
-                        <textarea id="comments" name="comments" placeholder="Substantive feedback, proposed revisions, or concerns. References welcome." required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="attribution">May your feedback be acknowledged?</label>
-                        <select id="attribution" name="attribution">
-                            <option>Yes — name and affiliation</option>
-                            <option>Yes — affiliation only</option>
-                            <option>No — anonymous</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="submit-btn">
-                        Submit Feedback
-                        <svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-                    </button>
-                    <p class="form-note">Responses are emailed directly to the author. No data is stored on this site.</p>
-                </form>
-            </div>
-        </section>
 
     </main>
 </div>
@@ -1747,36 +1771,6 @@ function updateActiveNav() {
 }
 window.addEventListener('scroll', updateActiveNav, { passive: true });
 updateActiveNav();
-
-// Lifecycle phases
-const phaseBtns = document.querySelectorAll('.phase-btn');
-const phasePanels = document.querySelectorAll('.phase-panel');
-
-phaseBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-        const phase = btn.dataset.phase;
-        phaseBtns.forEach(b => {
-            b.classList.toggle('active', b === btn);
-            b.setAttribute('aria-selected', b === btn);
-        });
-        phasePanels.forEach(p => p.classList.toggle('active', p.dataset.phase === phase));
-    });
-});
-
-// Keyboard nav for phases
-phaseBtns.forEach((btn, i) => {
-    btn.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
-            e.preventDefault();
-            const next = phaseBtns[(i + 1) % phaseBtns.length];
-            next.click(); next.focus();
-        } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
-            e.preventDefault();
-            const prev = phaseBtns[(i - 1 + phaseBtns.length) % phaseBtns.length];
-            prev.click(); prev.focus();
-        }
-    });
-});
 
 // Theme toggle
 const themeToggle = document.getElementById('themeToggle');
