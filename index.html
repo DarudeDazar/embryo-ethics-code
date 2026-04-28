@@ -242,7 +242,7 @@ body::before {
     display: grid;
     grid-template-columns: var(--sidebar-w) 1fr;
     gap: 64px;
-    padding-top: 64px;
+    padding-top: 80px; /* clears fixed topbar (~57px) + breathing room */
 }
 
 .sidenav {
@@ -1144,18 +1144,77 @@ footer {
         grid-template-columns: 1fr;
         gap: 0;
         padding: 0 24px;
-        padding-top: 60px;
+        padding-top: 80px;
     }
     .sidenav { display: none; }
     .mobile-nav-trigger { display: flex; }
     .mobile-nav-panel { display: block; }
     .about-grid { grid-template-columns: 1fr; gap: 28px; }
     .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+    /* Hide feedback + dark mode from topbar on mobile — both accessible via hero callout and mobile menu */
+    .top-actions a.feedback-link { display: none; }
+    .top-actions a.case-link { display: none; }
+    .theme-toggle { display: none; }
+}
+
+/* Floating dark mode + feedback bar on mobile */
+.mobile-bottom-bar {
+    display: none;
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 200;
+    background: var(--surface);
+    border: 1px solid var(--gray-200);
+    border-radius: 100px;
+    box-shadow: var(--shadow-lg);
+    padding: 6px 8px;
+    gap: 4px;
+    align-items: center;
+}
+
+.mobile-bottom-bar a,
+.mobile-bottom-bar button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: 100px;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+    white-space: nowrap;
+    min-height: 40px;
+}
+
+.mobile-bottom-bar a.mob-feedback {
+    background: var(--teal-800);
+    color: #fff;
+}
+.mobile-bottom-bar a.mob-feedback:hover { background: var(--teal-600); }
+
+.mobile-bottom-bar button.mob-theme {
+    background: var(--gray-100);
+    color: var(--gray-700);
+}
+.mobile-bottom-bar button.mob-theme:hover { background: var(--gray-200); }
+.mobile-bottom-bar button.mob-theme svg {
+    width: 15px; height: 15px;
+    stroke: currentColor; fill: none; stroke-width: 1.8;
+}
+
+@media (max-width: 900px) {
+    .mobile-bottom-bar { display: flex; }
 }
 
 @media (max-width: 600px) {
     .topbar-inner { padding: 12px 20px; }
-    .layout { padding: 0 20px; }
+    .layout { padding: 0 20px; padding-top: 80px; }
     .prohibited-grid { grid-template-columns: 1fr; }
     .hero-feedback-callout { flex-direction: column; gap: 12px; }
     .hero-feedback-callout a { align-self: flex-start; }
@@ -1759,6 +1818,18 @@ footer {
     <div class="footer-small">© 2026 Rohan Dasari · Draft 8 · Harvard Medical School Center for Bioethics</div>
 </footer>
 
+<!-- Mobile floating action bar -->
+<div class="mobile-bottom-bar" id="mobileBottomBar">
+    <a href="#feedback" class="mob-feedback">Submit Feedback</a>
+    <button class="mob-theme" id="mobThemeToggle" aria-label="Toggle color theme">
+        <svg id="mobThemeIcon" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+        </svg>
+        <span id="mobThemeLabel">Dark</span>
+    </button>
+</div>
+
 <script>
 // Scroll progress bar
 const progress = document.getElementById('scrollProgress');
@@ -1807,10 +1878,18 @@ const html = document.documentElement;
 const sunPath = '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>';
 const moonPath = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
 
+const mobThemeToggle = document.getElementById('mobThemeToggle');
+const mobThemeIcon = document.getElementById('mobThemeIcon');
+const mobThemeLabel = document.getElementById('mobThemeLabel');
+
 function applyTheme(t) {
     html.setAttribute('data-theme', t);
-    themeIcon.innerHTML = t === 'dark' ? sunPath : moonPath;
-    themeLabel.textContent = t === 'dark' ? 'Light' : 'Dark';
+    const icon = t === 'dark' ? sunPath : moonPath;
+    const label = t === 'dark' ? 'Light' : 'Dark';
+    themeIcon.innerHTML = icon;
+    themeLabel.textContent = label;
+    if (mobThemeIcon) mobThemeIcon.innerHTML = icon;
+    if (mobThemeLabel) mobThemeLabel.textContent = label;
 }
 
 try {
@@ -1819,6 +1898,12 @@ try {
 } catch(e) { applyTheme('light'); }
 
 themeToggle.addEventListener('click', () => {
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    applyTheme(next);
+    try { localStorage.setItem('theme-pref', next); } catch(e) {}
+});
+
+mobThemeToggle?.addEventListener('click', () => {
     const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
     applyTheme(next);
     try { localStorage.setItem('theme-pref', next); } catch(e) {}
